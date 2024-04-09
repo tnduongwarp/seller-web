@@ -1,0 +1,66 @@
+<nz-layout class="app-layout" *ngIf="authUser">
+  <nz-sider class="menu-sidebar"
+            nzCollapsible
+            nzWidth="256px"
+            nzBreakpoint="md"
+            [(nzCollapsed)]="isCollapsed"
+            [nzTrigger]="null">
+    <div class="sidebar-logo">
+      <a href="https://ng.ant.design/" target="_blank">
+        <img src="/assets/img/logo.png" alt="logo">
+        <h1>Ecommerce {{title}}</h1>
+      </a>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <ng-container *ngFor="let item of sidebar">
+        <li *ngIf="item.children && item.children.length" nz-submenu nzOpen [nzTitle]="item.name" [nzIcon]="item.icon">
+          <ul>
+            <li *ngFor="let child of item.children" nz-menu-item nzMatchRouter>
+              <a [routerLink]="child.link" (click)="setTitleComponent(child.name)">{{child.name}}</a>
+            </li>
+          </ul>
+        </li>
+        <li *ngIf="!item.children || !item.children.length" [routerLink]="item.link" nz-menu-item nzMatchRouter (click)="setTitleComponent(item.name)">
+          <span nz-icon [nzType]="item.icon"></span>
+          <span >{{item.name}}</span>
+        </li>
+      </ng-container>
+    </ul>
+    <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+      <span class="trigger"
+         nz-icon
+         [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+      ></span>
+  </span>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <div class="title">{{titleComponent}}</div>
+        <div class="user-profile" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+          <div class="image">
+            <img width="30" height="30" src="/assets/img/logo.png" alt="">
+          </div>
+          <div class="name">Trần Nam Dương</div>
+          <span nz-icon nzType="down" nzTheme="outline"></span>
+        </div>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
+<ng-container *ngIf="!authUser">
+  <router-outlet></router-outlet>
+</ng-container>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item>
+      Hồ sơ
+    </li>
+    <li nz-menu-item (click)="logOut()">Đăng xuất</li>
+  </ul>
+</nz-dropdown-menu>

@@ -1,0 +1,37 @@
+<div class="form-label-v1" style="margin-bottom: 20px;" [innerHTML]="txtForgotPwdGuide"></div>
+
+<nz-form-item class="form-value-v1" *ngIf="phase==1">
+  <input nz-input type="email" name="email" #emailInput
+    placeholder="The email which you use to log in"
+    [(ngModel)]="inputEmail">
+</nz-form-item>
+
+<nz-form-item class="form-value-v1" *ngIf="phase==2">
+  <input type="text" #codeInput [(ngModel)]="inputCode" nz-input placeholder="OTP" nzSize="large"  style="margin-bottom: 15px;"/>
+
+  <div style="margin: 20px 0; font-style: italic;">{{pwPolicy}}</div>
+
+  <nz-input-group [nzSuffix]="pwVisible" nzSize="large" style="margin-bottom: 15px;">
+    <input #pwInput nz-input [type]="pwHidden ? 'password' : 'text'" placeholder="Enter new password" [(ngModel)]="inputPw"/>
+  </nz-input-group>
+  <ng-template #pwVisible>
+    <i class="fa" [ngClass]="{'fa-eye-slash': pwHidden, 'fa-eye': !pwHidden}" (click)="pwHidden = !pwHidden"></i>
+  </ng-template>
+  <nz-input-group [nzSuffix]="pwConfirmVisible" nzSize="large" style="margin-bottom: 15px;">
+    <input #pwConfirmInput nz-input [type]="pwConfirmHidden ? 'password' : 'text'" placeholder="Confirm new password" [(ngModel)]="inputPwConfirm"/>
+  </nz-input-group>
+  <ng-template #pwConfirmVisible>
+    <i class="fa" [ngClass]="{'fa-eye-slash': pwConfirmHidden, 'fa-eye': !pwConfirmHidden}" (click)="pwConfirmHidden = !pwConfirmHidden"></i>
+  </ng-template>
+</nz-form-item>
+
+<nz-form-item class="form-value-v1" *ngIf="phase==1||phase==2">
+  <button nz-button nzType="primary" [disabled]="!canSubmit" (click)="onBtnSubmit()" class="btn2 btn-submit">
+    Submit
+    <i nz-icon nzType="loading" class="ic-right" nzTheme="outline" *ngIf="isLoading"></i>
+  </button>
+</nz-form-item>
+
+<div class="center-children">
+  <div class="go-back-login" (click)="closeDialog()">Back to log in</div>
+</div>

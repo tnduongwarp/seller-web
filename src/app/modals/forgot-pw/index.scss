@@ -1,0 +1,17 @@
+:host {
+  margin-top: 30px;
+}
+.go-back-login {
+  cursor: pointer;
+  color: #1d51e2;
+  width: fit-content;
+  font-weight: 500;
+  font-size: 16px;
+}
+.go-back-login:hover {
+  text-decoration: underline;
+  opacity: 0.7;
+}
+.btn-submit {
+  width: 100%;
+}

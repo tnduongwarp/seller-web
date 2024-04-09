@@ -1,0 +1,16 @@
+<div class="header-chat">
+  <span><b>{{getReceiverName(receiverDetail)}}</b></span>
+</div>
+<div class="msg-list " *ngIf="msgList"  #scrollframe>
+  <div  *ngFor="let m of msgList">
+
+   <div [ngClass]="{'jtf-end': m.owner == owner}" class="chat-message"> <span [ngClass]="{'me': m.owner == owner}" class="chat-bubble ">
+    <span >{{m.content}} </span>
+  </span></div>
+  </div>
+</div>
+
+<div class="chat-bar">
+    <input (keyup.enter)="send()"  class="input" [(ngModel)] = 'currentMsg'>
+    <button nz-button nzType="primary" (click)="send()"  > SEND </button>
+</div>

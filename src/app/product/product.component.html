@@ -1,0 +1,52 @@
+<div>
+  <div style="margin-bottom: 30px;">
+    <button nz-button nzType="default">
+      <span nz-icon nzType="plus"></span>
+      Thêm sản phẩm
+    </button>
+  </div>
+  <nz-table #productTable
+    nzBordered
+    [nzData]="listOfDisplayData"
+    nzFrontPagination="true"
+    [nzTotal]="this.listOfDisplayData.length"
+    nzPageSize="10"
+    [nzLoading]="isLoading"
+    >
+    <thead>
+      <tr>
+        <th nzWidth="25%" nzCustomFilter >Tên sản phẩm
+          <nz-input-group [nzSuffix]="suffixIconSearch">
+            <input type="text" nz-input  placeholder="Search name" [(ngModel)]="searchValue" (ngModelChange)="search()"/>
+          </nz-input-group>
+          <ng-template #suffixIconSearch>
+            <span nz-icon nzType="search"></span>
+          </ng-template>
+        </th>
+        <th nzWidth="15%" [(nzSortOrder)]="amountSort" [nzSortFn]="sortAmount">Số lượng</th>
+        <th nzWidth="15%" [(nzSortOrder)]="soldSort" [nzSortFn]="sortSold">Đã bán</th>
+        <th nzWidth="15%">Giá</th>
+        <th nzWidth="15%" [(nzSortOrder)]="createdSort" [nzSortFn]="sortCreated">Ngày đăng</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of productTable.data">
+          <td><a [routerLink]="getRouterLink(data)">{{ data.title }}</a></td>
+          <td>{{ data.amount }}</td>
+          <td style="color: rgb(10, 240, 10); font-weight: bold;">{{ data.sold }}</td>
+          <td>{{ convertNumberToCurrency(data.price) }}</td>
+          <td>{{ formatDate(data.created) }}</td>
+          <td>
+            <a [routerLink]="getRouterLink(data)"><span nz-icon nzType="edit" nzTheme="outline"></span>
+            </a>
+            <span
+              nz-popconfirm
+              nzPopconfirmTitle="Bạn chắc chắn muốn xóa sản phẩm này chứ ?"
+              (nzOnConfirm)="deleteProduct(data._id)"
+               style="margin-left: 15px; cursor: pointer;" nz-icon nzType="delete" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'"></span>
+          </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
