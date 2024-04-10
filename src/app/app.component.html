@@ -48,6 +48,7 @@
     </nz-header>
     <nz-content>
       <div class="inner-content">
+        <button style="position: fixed; bottom: 50px; right: 50px;" nz-button nzDanger nzType="primary" nzShape="circle" nzSize="large" (click)="openChat()"><span nz-icon nzType="comment" nzTheme="outline"></span></button>
         <router-outlet></router-outlet>
       </div>
     </nz-content>
@@ -55,6 +56,7 @@
 </nz-layout>
 <ng-container *ngIf="!authUser">
   <router-outlet></router-outlet>
+
 </ng-container>
 <nz-dropdown-menu #menu="nzDropdownMenu">
   <ul nz-menu>

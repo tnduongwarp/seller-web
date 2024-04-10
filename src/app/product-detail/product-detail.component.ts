@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { FormControl, FormRecord, NonNullableFormBuilder } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
-const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
+export const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -130,12 +130,15 @@ export class ProductDetailComponent extends BaseComponent{
 
   async save(){
     console.log('fileList', this.fileList);
+    let newfiles = this.fileList.filter(it => it?.originFileObj);
+    if(newfiles.length > 2) return this.message.error('Bạn chỉ có thể upload thêm nhiều nhất 2 ảnh')
     let fileNameList = this.fileList.map(it => it.name);
-    let formValue: any = {...this.validateForm.value, deleteImages: []};
+    let formValue: any = {...this.validateForm.value, deleteImages: [], addImage:[]};
     const formData = new FormData();
     for(let file of this.fileList){
       if(file?.originFileObj){
         formData.append('files',file.originFileObj, file.originFileObj?.name);
+        formValue.addImage.push(file.originFileObj?.name)
       }
     }
     for(let file of this.originalFileList){

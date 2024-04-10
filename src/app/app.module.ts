@@ -1,6 +1,6 @@
 import { Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NzSegmentedModule } from 'ng-zorro-antd/segmented';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
@@ -55,6 +55,11 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { CreateProductModal } from './modals/create-product/create-product.component';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { ChannelComponent } from './modals/chat/views/channel/channel.component';
+import { ChatComponent } from './modals/chat/views/chat/chat.component';
+import { ReceiverComponent } from './modals/chat/views/receiver/receiver.component';
 
 registerLocaleData(en);
 
@@ -71,7 +76,11 @@ export class MyIntl extends TimeagoIntl {
     RevenueComponent,
     AdvertisementComponent,
     ProfileComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    CreateProductModal,
+    ChannelComponent,
+    ChatComponent,
+    ReceiverComponent
   ],
   imports: [
     TimeagoModule.forRoot({
@@ -115,7 +124,9 @@ export class MyIntl extends TimeagoIntl {
     NzTimelineModule,
     NzDropDownModule,
     NzTableModule,
-    NzUploadModule
+    NzUploadModule,
+    NzSegmentedModule,
+    NzDrawerModule
   ],
   providers: [RestApiService, AuthGuardService,
     { provide: NZ_I18N, useValue: en_US },

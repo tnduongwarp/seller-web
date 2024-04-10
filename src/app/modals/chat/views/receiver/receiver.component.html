@@ -1,0 +1,15 @@
+
+<div class="receiver" *ngIf="receiver">
+  <div  style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden; border: solid 1px rgb(252, 188, 68);">
+    <img [src]="receiver.user.picture" alt="" width="50px" height="50px">
+  </div>
+  <div style="display: flex; flex-direction: column;">
+    <div class="name">
+      <div style="color: black; font-size: 16px;"><b>{{getReceiverName(receiver.user)}}</b></div>
+      <div timeago [date]="latestMsg.created"></div>
+    </div>
+    <div class="last-message">
+      {{latestMsg.content}}
+    </div>
+  </div>
+</div>

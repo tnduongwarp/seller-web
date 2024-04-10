@@ -1,28 +1,15 @@
-<div style="display: flex; min-height: 600px;">
+<div style="display: flex; min-height: 600px; width: 100%;">
 
   <aside class="aside ">
     <div class="main">
-      <div *ngFor="let receiver of listReceiver" class="receiver" (click)="changeReceiver(receiver)">
-        <div style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden; border: solid 1px rgb(252, 188, 68);">
-          <img [src]="receiver.user.picture" alt="" width="50px" height="50px">
-        </div>
-       <div style="display: flex; flex-direction: column;">
-          <div class="name">
-            <div style="color: black; font-size: 16px;"><b>{{getReceiverName(receiver.user)}}</b></div>
-            <div timeago [date]="receiver.firstMsg[0].created"></div>
-          </div>
-          <div class="last-message">
-            {{receiver.firstMsg[0].content}}
-          </div>
-        </div>
+      <div *ngFor="let receiver of listReceiver" class="receiver" [ngClass]="{'selected': isSelected(receiver.user)}" (click)="changeReceiver(receiver)">
+        <app-receiver [receiver]="receiver"></app-receiver>
       </div>
     </div>
   </aside>
 
   <div class="hero column chat-wrapper is-9 is-dark">
-
-    <app-channel [receiver]="presentReceiver" [receiverDetail]="receiver"></app-channel>
-
+    <app-channel *ngIf="!isLoading" [receiver]="presentReceiver" [receiverDetail]="receiver"></app-channel>
   </div>
 
 

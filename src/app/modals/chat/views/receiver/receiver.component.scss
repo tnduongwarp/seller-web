@@ -1,0 +1,19 @@
+.receiver{
+  display: flex;
+  min-height: 80px;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  padding-left: 10px;
+
+  .name{
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+  }
+}
+.receiver:hover{
+  background-color: #B7C6C9;
+}

@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from './base/base.component';
 import { Router } from '@angular/router';
+import { NzDrawerService } from 'ng-zorro-antd/drawer';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { ChatComponent } from './modals/chat/views/chat/chat.component';
+import { TimeagoIntl } from 'ngx-timeago';
+import { strings as vnStrings } from "ngx-timeago/language-strings/vi";
 
 @Component({
   selector: 'app-root',
@@ -13,8 +18,11 @@ export class AppComponent extends BaseComponent{
   public get authUser(){
     return JSON.parse(localStorage.getItem('user')!)
   };
-  constructor(private router: Router){
+  constructor(private router: Router,private modalService: NzModalService,intl: TimeagoIntl){
     super();
+    intl.strings = vnStrings;
+    intl.changes.next();
+
     let url = window.location.pathname;
     for(let item of this.sidebar){
       if(item.children && item.children.length){
@@ -81,4 +89,18 @@ export class AppComponent extends BaseComponent{
   public setTitleComponent(name: string){
     this.titleComponent = name;
   }
+
+  public openChat(){
+    this.modalService.create({
+      nzTitle: 'Chat',
+      nzFooter: null,
+      nzMask: false,
+      nzWidth: 850,
+      nzBodyStyle:{
+        padding: '0',
+      },
+      nzContent: ChatComponent,
+    })
+  }
+
 }

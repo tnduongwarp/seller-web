@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
 import { Const } from '../const/const';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { CreateProductModal } from '../modals/create-product/create-product.component';
 
 @Component({
   selector: 'app-product',
@@ -15,7 +17,9 @@ export class ProductComponent extends BaseComponent{
   soldSort: any = null;
   createdSort: any = null;
   isLoading: boolean = false;
-  constructor(){
+  createProductModalInstance: any = null;
+  productType = '0';
+  constructor(private modalService: NzModalService){
     super();
   }
 
@@ -23,9 +27,14 @@ export class ProductComponent extends BaseComponent{
     this.getData();
   }
   getData() {
+    if(this.createProductModalInstance) this.createProductModalInstance.close();
     let owner = JSON.parse(localStorage.getItem('user')!);
     this.isLoading = true;
-    this.api.get(`${Const.API_GET_LIST_PRODUCT}/getListForSeller/${owner._id}`).then(
+    let filter: any = {
+      type: this.productType
+    };
+    const qs = new URLSearchParams(filter).toString();
+    this.api.get(`${Const.API_GET_LIST_PRODUCT}/getListForSeller/${owner._id}?${qs}`).then(
       (res: any) => {
         this.listData = res.data;
         this.listOfDisplayData = res.data;
@@ -67,5 +76,21 @@ export class ProductComponent extends BaseComponent{
     this.api.post(`${Const.API_SELLER}/delete-product/${id}`, {})
     .then(res => this.getData())
     .catch(err => console.log(err))
+  }
+
+  createProduct(){
+    this.createProductModalInstance = this.modalService.create({
+      nzContent: CreateProductModal,
+      nzWidth: '100vw',
+      nzTitle:'Thông tin sản phẩm',
+      nzFooter: null,
+      nzStyle:{
+        top:'20px'
+
+      },
+      nzData: {
+        refreshData: () => this.getData()
+      }
+    })
   }
 }

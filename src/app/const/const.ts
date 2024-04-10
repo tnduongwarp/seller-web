@@ -9,4 +9,5 @@ export class Const {
   public static readonly API_ORDER = `${this.ORIGIN}/order`;
   public static readonly API_CHAT = `${this.ORIGIN}/chat`;
   public static readonly API_SELLER = `${this.ORIGIN}/seller`;
+  public static readonly API_SAVE_IMAGE = `${this.ORIGIN}/upload_image`;
 }

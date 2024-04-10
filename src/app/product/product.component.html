@@ -1,9 +1,13 @@
 <div>
-  <div style="margin-bottom: 30px;">
-    <button nz-button nzType="default">
+  <div style="margin-bottom: 30px; display: flex; justify-content: space-between;">
+    <button nz-button nzType="default" (click)="createProduct()">
       <span nz-icon nzType="plus"></span>
       Thêm sản phẩm
     </button>
+    <nz-select  nzAllowClear="false" nzPlaceHolder="Chọn loại sản phẩm" [(ngModel)]="productType" (ngModelChange)="getData()">
+      <nz-option nzLabel="Đã được phê duyệt" nzValue="0"></nz-option>
+      <nz-option nzLabel="Đang chờ phê duyệt" nzValue="1"></nz-option>
+    </nz-select>
   </div>
   <nz-table #productTable
     nzBordered

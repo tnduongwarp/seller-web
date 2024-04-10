@@ -29,12 +29,13 @@ export class ChannelComponent extends BaseComponent {
 
   send() {
     if (this.currentMsg.length) {
+      console.log('11')
       this.socket.emit('send_message', { message: this.currentMsg, owner: this.owner, receiver: this.receiver });
       this.currentMsg = "";
     }
   }
 
-  override ngOnInit() {
+  override ngOnChanges() {
     const body = {
       owner: this.owner,
       receiver: this.receiver
@@ -45,22 +46,22 @@ export class ChannelComponent extends BaseComponent {
       setTimeout(() => {
         this.scrollToBottom()
       },2)
-      console.log(this.msgList)
     });
     this.socket.on('receive_message', (data: any) => {
-      console.log(data)
       if((data.receiver.toString() === this.receiver.toString() && data.owner.toString() === this.owner.toString()) || (data.receiver.toString() === this.owner.toString() && data.owner.toString() === this.receiver.toString())){
-        this.msgList.push(data);
-        setTimeout(() => {
-          this.scrollToBottom()
-        },2)
+        let exist = this.msgList.filter((it: any) => it._id.toString() === data._id.toString());
+        if(!exist.length){
+          this.msgList.push(data);
+          setTimeout(() => {
+            this.scrollToBottom()
+          },2)
+        }
       }
     })
   }
 
 
   private scrollToBottom(): void {
-    console.log(this.scrollFrame.nativeElement.scrollHeight)
     this.scrollFrame.nativeElement.scroll({
       top: this.scrollFrame.nativeElement.scrollHeight+ 50,
       left: 0,
@@ -70,6 +71,12 @@ export class ChannelComponent extends BaseComponent {
 
   getReceiverName(user: any){
     if(user.isSeller) return user.shopName;
-    return user.firstname + ' ' + user.lastname;
+    if(user?.name) return user.name;
+    if(user?.firstname && user?.lastname) return user?.firstname + ' ' + user?.lastname;
+
+
+  }
+  override ngOnDestroy(){
+    this.socket.disconnect();
   }
 }

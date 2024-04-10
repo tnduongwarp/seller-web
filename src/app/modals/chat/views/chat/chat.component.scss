@@ -11,6 +11,10 @@
   border-right: solid 1px rgb(216, 213, 213);
   .main{
     color: #6F7B7E;
+
+    .selected{
+      background-color: #ecebeb;
+    }
     .receiver{
       display: flex;
       min-height: 80px;

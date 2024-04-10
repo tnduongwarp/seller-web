@@ -1,1 +1,61 @@
-<p>create-product works!</p>
+<div style="margin-bottom: 10px;">
+  <div style="font-weight: 500; font-size: 17px;">Chọn loại sản phẩm</div>
+  <nz-segmented [nzOptions]="options" [nzBlock]="true" [(ngModel)]="selected"></nz-segmented>
+</div>
+<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
+  <div nz-row [nzGutter]="24">
+      <div *ngFor="let control of controlArray" nz-col [nzSpan]="8" >
+        <nz-form-item>
+          <nz-form-label [nzFor]="control.field">{{ control.label }}</nz-form-label>
+          <nz-form-control>
+            <input
+              nz-input
+              [placeholder]="control.placeHolder"
+              [formControlName]="control.field"
+              [attr.id]="control.index"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+  </div>
+  <div nz-row >
+    <nz-form-item style="width: 100%;">
+      <nz-form-label [nzFor]="'description'">Mô tả</nz-form-label>
+      <nz-form-control>
+        <textarea
+          nz-input
+          rows="6"
+          placeholder="Nhập thông tin mô tả sản phẩm..."
+          [formControlName]="'description'"
+        ></textarea>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+</form>
+<div class="clearfix">
+  <h4>Ảnh</h4>
+  <nz-upload
+    nzListType="picture-card"
+    [(nzFileList)]="fileList"
+    [nzShowButton]="fileList.length < 11"
+    [nzPreview]="handlePreview"
+  >
+    <div>
+      <span nz-icon nzType="plus"></span>
+      <div style="margin-top: 8px">Tải lên</div>
+    </div>
+  </nz-upload>
+  <nz-modal
+    [nzVisible]="previewVisible"
+    [nzContent]="modalContent"
+    [nzFooter]="null"
+    (nzOnCancel)="previewVisible = false"
+  >
+    <ng-template #modalContent>
+      <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+    </ng-template>
+  </nz-modal>
+</div>
+<div style="display: flex; justify-content: end; margin: 20px;">
+  <button nz-button nzType="primary" (click)="save()">LƯU</button></div>
+<div style="margin-top: 20px;">
