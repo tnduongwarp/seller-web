@@ -6,6 +6,10 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { ChatComponent } from './modals/chat/views/chat/chat.component';
 import { TimeagoIntl } from 'ngx-timeago';
 import { strings as vnStrings } from "ngx-timeago/language-strings/vi";
+import { io } from 'socket.io-client';
+import { Const } from './const/const';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-root',
@@ -15,14 +19,28 @@ import { strings as vnStrings } from "ngx-timeago/language-strings/vi";
 export class AppComponent extends BaseComponent{
   isCollapsed = false;
   public titleComponent: string = '';
+  private socket: any;
+  public messageModal: any;
   public get authUser(){
     return JSON.parse(localStorage.getItem('user')!)
   };
-  constructor(private router: Router,private modalService: NzModalService,intl: TimeagoIntl){
+  constructor(private router: Router,private modalService: NzModalService,intl: TimeagoIntl, private message: NzNotificationService){
     super();
     intl.strings = vnStrings;
     intl.changes.next();
-
+    this.socket = io('http://localhost:3000');
+    this.socket.on('receive_message', (data: any) => {
+      if(data.receiver.toString() === this.authUser?._id?.toString() && !this.messageModal){
+        this.api.get(`${Const.API_USER}/${data.owner}`).then(
+          (data: any) => {
+            const user= data.data
+            this.message.info('Tin nhắn mới',`Bạn có tin nhắn mới từ ${user?.name || user?.firstname + ' ' + user?.lastname}`, {
+              nzDuration: 1500
+            })
+          }
+        )
+      }
+    })
     let url = window.location.pathname;
     for(let item of this.sidebar){
       if(item.children && item.children.length){
@@ -40,6 +58,7 @@ export class AppComponent extends BaseComponent{
       }
     }
   }
+
   public get title(){
     if(this.authUser?.role === 'seller') return 'Seller';
     if(this.authUser?.role === 'admin') return 'Admin';
@@ -90,8 +109,13 @@ export class AppComponent extends BaseComponent{
     this.titleComponent = name;
   }
 
+  public deleteMessageModal(){
+    this.messageModal = null;
+  }
+
   public openChat(){
-    this.modalService.create({
+    if(this.messageModal) return;
+    this.messageModal = this.modalService.create({
       nzTitle: 'Chat',
       nzFooter: null,
       nzMask: false,
@@ -99,6 +123,7 @@ export class AppComponent extends BaseComponent{
       nzBodyStyle:{
         padding: '0',
       },
+      nzOnCancel:() => this.deleteMessageModal() ,
       nzContent: ChatComponent,
     })
   }
