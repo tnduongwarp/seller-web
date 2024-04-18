@@ -1,0 +1,9 @@
+:host{
+  .label{
+    font-size: 15px;
+    font-weight: 500;
+  }
+  ::ng-deep nz-select{
+    min-width: 300px;
+  }
+}

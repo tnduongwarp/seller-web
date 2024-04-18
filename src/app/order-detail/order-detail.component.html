@@ -1,0 +1,83 @@
+<div class="container" *ngIf="!isLoading">
+  <div  class="header-container">
+    <div class="order-info-container">
+      <div class="label">Thông tin đơn hàng</div>
+      <div class="item">
+        <div class="title"><span nz-icon nzType="barcode" nzTheme="outline"></span> <span>Mã đơn hàng:</span></div>
+        <div class="content"><code>{{order._id}}</code></div>
+      </div>
+      <div class="item">
+        <div class="title"><span nz-icon nzType="field-time" nzTheme="outline"></span> <span>Thời gian tạo:</span></div>
+        <div class="content">{{formatDate(order.created)}}</div>
+      </div>
+      <div class="item">
+        <div class="title"><span nz-icon nzType="user" nzTheme="outline"></span> <span>Người đặt:</span></div>
+        <div class="content">{{getUsername(order.owner)}}</div>
+        <span style="margin-left: 20px; cursor: pointer;" nz-icon nzType="send" nzTheme="outline" (click)="chatWithUser(order.owner)"></span>
+      </div>
+      <div class="item">
+        <div class="title"><span nz-icon nzType="environment" nzTheme="outline"></span> <span>Địa chỉ:</span></div>
+        <div class="content">{{order.address}}</div>
+      </div>
+      <div class="item">
+        <div class="title"><span nz-icon nzType="mail" nzTheme="outline"></span> <span>Email:</span></div>
+        <div class="content"><a>{{order.owner.email}}</a></div>
+      </div>
+      <div class="item">
+        <div class="title"><span nz-icon nzType="check-circle" nzTheme="outline"></span> <span>Tổng tiền:</span></div>
+        <div class="content">{{(convertNumberToCurrency(order.totalPrice))}}</div>
+      </div>
+      <div class="item">
+        <div class="title"><span nz-icon nzType="credit-card" nzTheme="outline"></span> <span>Hình thức thanh toán:</span></div>
+        <div class="content">{{getPaymentTypeText(order.paymentType)}}</div>
+      </div>
+      <div class="item" style="margin-top: 20px; color: rgb(255, 32, 32); font-style: italic;">
+        <div class="title"><span >*</span> <span>Ghi chú:</span></div>
+        <div class="content">{{order.note}}</div>
+      </div>
+    </div>
+    <div class="transit-container">
+      <div class="header">Trạng thái đơn hàng:
+        <span class="status" [ngClass]="order.status">{{getStatusText(order.status)}}</span>
+        <span nz-icon nzType="edit" nzTheme="outline" style="cursor: pointer;" (click)="onEditStatus()"></span>
+      </div>
+      <div class="timeline-route">
+        <div class="history">
+          <nz-timeline nzMode="left" nzReverse="true">
+            <nz-timeline-item *ngFor="let item of order.transitHistory" [nzLabel]="formatDate(item.when)">{{item.status}}</nz-timeline-item>
+          </nz-timeline>
+        </div>
+      </div>
+      <div class="input">
+        <input nz-input [(ngModel)]="transitStatus" type="text" placeholder="Cập nhật trạng thái đơn hàng ở đây...">
+        <button nz-button nzType="primary" (click)="updateOrder()">Lưu</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-container">
+      <div style="padding-right: 20px;">
+        <div *ngFor="let item of order.products let i=index;" class="cartItem">
+          <div style="display: flex; justify-content: space-between;">
+           <div style="display: flex; gap: 20px;">
+            <div>
+              <a routerLink="/product/{{ item.product._id }}">
+                <img src="{{ item.product.image.split(',')[0] }}" alt="productImage" width="120" height="120">
+              </a>
+            </div>
+            <div>
+              <div>
+                <a routerLink="/product/{{  item.product._id }}">{{  item.product.title }}</a>
+                <div>x{{item.quantity}}</div>
+              </div>
+            </div>
+           </div>
+            <div style="display: flex; justify-content: end; align-items: start; margin-left: 300px;">
+              <div style="font-weight: bold; color: orangered;">{{ convertNumberToCurrency(item.product.price*item.quantity) }}</div>
+            </div>
+          </div>
+          <nz-divider></nz-divider>
+        </div>
+      </div>
+  </div>
+</div>

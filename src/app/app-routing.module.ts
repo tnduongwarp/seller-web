@@ -8,6 +8,8 @@ import { RevenueComponent } from './revenue/revenue.component';
 import { AdvertisementComponent } from './advertisement/advertisement.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { OrderComponent } from './order/order.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 const routes: Routes = [
   {
@@ -38,6 +40,16 @@ const routes: Routes = [
   {
     path: 'advertise',
     component: AdvertisementComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'order',
+    component: OrderComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'order/:id',
+    component: OrderDetailComponent,
     canActivate: [AuthGuardService],
   },
   {

@@ -60,6 +60,12 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { ChannelComponent } from './modals/chat/views/channel/channel.component';
 import { ChatComponent } from './modals/chat/views/chat/chat.component';
 import { ReceiverComponent } from './modals/chat/views/receiver/receiver.component';
+import { OrderComponent } from './order/order.component';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { ChangeStatusComponent } from './modals/change-status/change-status.component';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 
 registerLocaleData(en);
 
@@ -80,7 +86,10 @@ export class MyIntl extends TimeagoIntl {
     CreateProductModal,
     ChannelComponent,
     ChatComponent,
-    ReceiverComponent
+    ReceiverComponent,
+    OrderComponent,
+    OrderDetailComponent,
+    ChangeStatusComponent
   ],
   imports: [
     TimeagoModule.forRoot({
@@ -126,7 +135,10 @@ export class MyIntl extends TimeagoIntl {
     NzTableModule,
     NzUploadModule,
     NzSegmentedModule,
-    NzDrawerModule
+    NzDrawerModule,
+    NzToolTipModule,
+    NzDescriptionsModule,
+    NzStatisticModule
   ],
   providers: [RestApiService, AuthGuardService,
     { provide: NZ_I18N, useValue: en_US },

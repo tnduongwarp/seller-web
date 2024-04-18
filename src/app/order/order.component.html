@@ -1,0 +1,70 @@
+<div class="container">
+  <div *ngIf="!isLoading" class="header-container">
+    <div class="filter">
+      <div class="item">
+        <div class="label">Tìm kiếm</div>
+        <nz-input-group [nzPrefix]="prefixIconSearch">
+          <input type="text" nz-input placeholder="Nhập từ khóa tìm kiếm..." [(ngModel)]="search" (keydown.enter)="onSearch($event)"/>
+        </nz-input-group>
+        <ng-template #prefixIconSearch>
+          <span nz-icon nzType="search"></span>
+        </ng-template>
+      </div>
+
+      <div class="item">
+        <div class="label">Thời gian</div>
+        <nz-range-picker [nzPlaceHolder]="['Chọn ngày bắt đầu', 'Chọn ngày kết thúc']" [(ngModel)]="selectedTime" (ngModelChange)="onDateRangeChange($event)"></nz-range-picker>
+      </div>
+
+      <div class="item">
+        <div class="label">Chọn khách hàng cụ thể</div>
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn một khách hàng" [(ngModel)]="selectedClient" (ngModelChange)="onSearch($event)">
+          <nz-option *ngFor="let client of listClients" nzCustomContent [nzLabel]="client.email" [nzValue]="client._id">
+            <span  nz-tooltip [nzTooltipTitle]="getUsername(client)" nzTooltipPlacement="right">{{client.email}}</span>
+          </nz-option>
+        </nz-select>
+      </div>
+      <div class="item">
+        <div class="label">Trạng thái</div>
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn trạng thái" [(ngModel)]="selectedStatus" (ngModelChange)="onSearch($event)">
+          <nz-option *ngFor="let status of statusList"  [nzLabel]="getStatusText(status)" [nzValue]="status">
+          </nz-option>
+        </nz-select>
+      </div>
+    </div>
+  </div>
+
+  <div  *ngIf="!isLoading" class="content-container">
+    <nz-table
+      #orderTable
+      [nzData]="listOrder"
+      [nzLoading]="isLoading"
+      [nzPageSize]="pageSize"
+      [nzTotal]="total"
+      [nzPageIndex]="pageIndex"
+      nzFrontPagination="false"
+      (nzPageIndexChange)="onChangePage($event)"
+    >
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Tên khách hàng</th>
+        <th>Thời gian tạo</th>
+        <th>Tổng tiền</th>
+        <th>Trạng thái</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of orderTable.data">
+        <td>
+          <a [routerLink]="getRouterLink(data)">{{data._id}}</a>
+        </td>
+        <td>{{getClientName(data.owner)}}</td>
+        <td>{{formatDate(data.created)}}</td>
+        <td>{{convertNumberToCurrency(data.totalPrice)}}</td>
+        <td><span class="status" [ngClass]= "data.status">{{getStatusText(data.status)}}</span></td>
+      </tr>
+    </tbody>
+    </nz-table>
+  </div>
+</div>

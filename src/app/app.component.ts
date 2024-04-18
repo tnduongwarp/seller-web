@@ -76,6 +76,10 @@ export class AppComponent extends BaseComponent{
           link: '/product'
         },
         {
+          name: 'Quản lí đơn hàng',
+          link: '/order'
+        },
+        {
           name: 'Thống kê doanh số',
           link: '/revenue'
         },

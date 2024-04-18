@@ -29,7 +29,6 @@ export class ChannelComponent extends BaseComponent {
 
   send() {
     if (this.currentMsg.length) {
-      console.log('11')
       this.socket.emit('send_message', { message: this.currentMsg, owner: this.owner, receiver: this.receiver });
       this.currentMsg = "";
     }

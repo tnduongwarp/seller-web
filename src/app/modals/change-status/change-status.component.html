@@ -1,0 +1,10 @@
+<div>
+  <div class="label">Chọn trạng thái</div>
+  <nz-select [(ngModel)]="selectedStatus">
+    <nz-option *ngFor="let item of orderStatus" [nzValue]="item" [nzLabel]="getStatusText(item)" [nzDisabled]="checkDisable(item)"></nz-option>
+  </nz-select>
+</div>
+<ng-template [nzModalFooter]>
+  <button nz-button nzType="default" (click)="handleCancel()">Thoát</button>
+  <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isConfirmLoading">Xác nhận</button>
+</ng-template>

@@ -34,8 +34,8 @@ export class ChatComponent extends BaseComponent {
       (res: any) => {
         console.log(res)
         this.listReceiver = res.data;
-        this.presentReceiver = res.data[0].user._id;
-        this.receiver = res.data[0].user;
+        this.presentReceiver = this.dataInput?.presentReceiver? this.dataInput?.presentReceiver : res.data[0].user._id;
+        this.receiver = res.data.filter((it: any) => it?.user?._id == this.presentReceiver)[0]?.user;
         this.isLoading = false;
       }
     )

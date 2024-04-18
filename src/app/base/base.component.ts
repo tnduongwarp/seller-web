@@ -45,4 +45,12 @@ export class BaseComponent implements OnChanges, OnInit, DoCheck, AfterContentIn
     let date = new Date(day);
     return format(date, 'hh:mm dd-MM-yyyy')
   }
+
+  public getUsername(user: any){
+    if(user?.name) return user.name;
+    if(user?.firstname && user?.lastname) return user.firstname + ' ' + user.lastname;
+    if(user?.firstname) return user.firstname;
+    if(user.lastname) return user.lastname;
+    return 'N/A'
+  }
 }

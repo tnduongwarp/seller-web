@@ -10,4 +10,21 @@ export class Const {
   public static readonly API_CHAT = `${this.ORIGIN}/chat`;
   public static readonly API_SELLER = `${this.ORIGIN}/seller`;
   public static readonly API_SAVE_IMAGE = `${this.ORIGIN}/upload_image`;
+
+  public static readonly orderStatus = {
+    CREATED: 'created',
+    PAID: 'paid',
+    IN_TRANSIT: 'inTransit',
+    GETTED: 'getted',
+    NEED_REVIEW: 'needReview',
+    COMPLETED: 'completed'
+  }
+  public static readonly orderStatusText = {
+    CREATED: 'Đã tạo',
+    PAID: 'Đã thanh toán',
+    IN_TRANSIT: 'Đang vận chuyển',
+    GETTED: 'Đã nhận hàng',
+    NEED_REVIEW: 'Chờ đánh giá',
+    COMPLETED: 'Hoàn thành'
+  }
 }

@@ -1,1 +1,38 @@
-<p>revenue works!</p>
+<div class="container" *ngIf="!isLoading">
+  <div  class="header-container">
+    <div class="order-info-container">
+      <div class="label">Tổng quan tháng <span>{{month}}</span></div>
+      <nz-row [nzGutter]="[0,16]" style="padding-top: 20px; padding-left: 20px;">
+        <nz-col [nzSpan]="8" >
+          <nz-statistic [nzValue]="(1949101 | number)!" [nzTitle]="'Tổng số đơn hàng'"></nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="8">
+          <nz-statistic [nzValue]="(2019.111 | number: '1.0-2')!" [nzTitle]="'Tổng doanh thu (VNĐ)'"></nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="8">
+          <nz-statistic
+              [nzValue]="(11.28 | number: '1.0-2')!"
+              [nzTitle]="'Tăng trưởng'"
+              [nzPrefix]="prefixTplOne"
+              [nzSuffix]="'%'"
+              [nzValueStyle]="{ color: '#3F8600' }"
+            ></nz-statistic>
+            <ng-template #prefixTplOne><span nz-icon nzType="arrow-up"></span></ng-template>
+        </nz-col>
+        <nz-col [nzSpan]="8">
+          <nz-statistic [nzValue]="(2019.111 | number: '1.0-2')!" [nzTitle]="'Số lượt đánh giá'"></nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="8">
+          <nz-statistic [nzValue]="(2019.111 | number: '1.0-2')!" [nzTitle]="'Tỷ lệ đánh giá trung bình'"></nz-statistic>
+        </nz-col>
+      </nz-row>
+    </div>
+    <div class="transit-container">
+
+    </div>
+  </div>
+
+  <div class="content-container">
+
+  </div>
+</div>
