@@ -1,1 +1,92 @@
-<p>profile works!</p>
+<nz-page-header
+  class="site-page-header"
+  nzTitle="Thông tin tài khoản"
+></nz-page-header>
+<div class="container">
+  <div style="margin-top: 20px; margin-left: 50px; width: 40%;">
+    <div *ngIf="!user" class="m-auto">
+      <h1 class="text-center display-3 mt-5">
+        <i class="fa fa-spinner fa-spin"></i>
+      </h1>
+    </div>
+    <div *ngIf="user" >
+      <form nz-form >
+        <nz-form-item>
+          <nz-form-label style="font-size: 17px;">Họ</nz-form-label>
+          <nz-form-control>
+            <input nz-input  type="text" [(ngModel)]="formControl.firstname" name="firstname" [disabled]="!isEditting">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label style="font-size: 17px;">Tên</nz-form-label>
+          <nz-form-control>
+            <input nz-input  type="text" [(ngModel)]="formControl.lastname" name="lastname" [disabled]="!isEditting">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label style="font-size: 17px;">Email</nz-form-label>
+          <nz-form-control>
+            <input nz-input  type="email" [(ngModel)]="formControl.email" name="email" [disabled]="!isEditting">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item >
+          <nz-form-control class="form-check-label">
+            <label nz-checkbox  [(ngModel)]="formControl.isSeller" name="isSeller" [disabled]="!isEditting"> Is Seller</label>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label style="font-size: 17px;">Tên shop</nz-form-label>
+          <nz-form-control>
+            <input nz-input  [(ngModel)]="formControl.shopName" name="shopName" [disabled]="!isEditting">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label style="font-size: 17px;">Địa chỉ</nz-form-label>
+          <nz-form-control>
+            <input nz-input  [(ngModel)]="formControl.shopAddress" name="shopAddress" [disabled]="!isEditting">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label style="font-size: 17px;">Số điện thoại</nz-form-label>
+          <nz-form-control>
+            <input nz-input  [(ngModel)]="formControl.metadata.phone" name="phone" [disabled]="!isEditting">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label style="font-size: 17px;">Giới tính</nz-form-label>
+          <nz-form-control>
+            <nz-radio-group [(ngModel)]="formControl.metadata.gender" name="gender" [disabled]="!isEditting">
+              <label nz-radio nzValue="male">Nam</label>
+              <label nz-radio nzValue="female">Nữ</label>
+              <label nz-radio nzValue="another">Khác</label>
+            </nz-radio-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label style="font-size: 17px;">Ngày sinh</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker [(ngModel)]="formControl.metadata.dateOfBirth"  name="dateOfBirth" [disabled]="!isEditting"></nz-date-picker>
+
+          </nz-form-control>
+        </nz-form-item>
+        <div>
+          <button nz-button nzType="primary" (click)="this.isEditting = !this.isEditting" style="margin-right: 10px;">{{isEditting? 'Quay lại':'Sửa'}}</button>
+          <button *ngIf="isEditting" nz-button nzType="primary" (click)="onBtnSave()">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="avatar">
+    <div class="image-box">
+        <div class="image">
+            <img [src]="currentAvatar" width="150" height="150">
+        </div>
+    </div>
+    <input type="file" accept=".jpg,.jpeg,.png" hidden (change)="onFileUpload($event)" #selectFile>
+    <button [disabled]="!isEditting" nz-button nzSize="large" nzType="default" (click)="selectFile.click()">Chọn Ảnh</button>
+    <div style="color: #999; font-size: .875rem; line-height: 1.25rem; margin-top: 10px;">
+      <div >Dụng lượng file tối đa 1 MB</div>
+      <div>Định dạng:.JPEG, .PNG</div>
+    </div>
+  </div>
+</div>

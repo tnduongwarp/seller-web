@@ -66,6 +66,7 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { ChangeStatusComponent } from './modals/change-status/change-status.component';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 registerLocaleData(en);
 
@@ -138,7 +139,8 @@ export class MyIntl extends TimeagoIntl {
     NzDrawerModule,
     NzToolTipModule,
     NzDescriptionsModule,
-    NzStatisticModule
+    NzStatisticModule,
+    NgApexchartsModule,
   ],
   providers: [RestApiService, AuthGuardService,
     { provide: NZ_I18N, useValue: en_US },

@@ -10,7 +10,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    // height: 100%;
     background-color: #f0f2f5;
 
 
@@ -23,15 +23,22 @@
       gap: 15px;
        .order-info-container{
           background-color: #fff;
-          min-height: 44vh;
+          height: 44vh;
           flex: 1;
           padding: 16px;
+          flex-shrink: 0;
 
        }
        .transit-container{
           background-color: #fff;
-          min-height: 44vh;
+          height: 44vh;
           flex: 1.5;
+          flex-shrink: 0;
+          overflow: auto;
+          #chart {
+            width: 800px;
+            margin: 0px 0 35px 35px;
+          }
        }
     }
 
@@ -42,7 +49,10 @@
       font-size: 14px;
       min-height: 44vh;
 
-
+      #chart1 {
+        width: 95%;
+        margin: 0px 0 35px 35px;
+      }
     }
   }
 

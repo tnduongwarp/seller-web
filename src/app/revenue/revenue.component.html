@@ -1,38 +1,76 @@
-<div class="container" *ngIf="!isLoading">
+<div class="container" >
   <div  class="header-container">
-    <div class="order-info-container">
+    <div class="order-info-container" *ngIf="!isLoadingOverviewData">
       <div class="label">Tổng quan tháng <span>{{month}}</span></div>
       <nz-row [nzGutter]="[0,16]" style="padding-top: 20px; padding-left: 20px;">
         <nz-col [nzSpan]="8" >
-          <nz-statistic [nzValue]="(1949101 | number)!" [nzTitle]="'Tổng số đơn hàng'"></nz-statistic>
+          <nz-statistic [nzValue]="(overviewData?.orderCount | number)!" [nzTitle]="'Tổng số đơn hàng'"></nz-statistic>
         </nz-col>
         <nz-col [nzSpan]="8">
-          <nz-statistic [nzValue]="(2019.111 | number: '1.0-2')!" [nzTitle]="'Tổng doanh thu (VNĐ)'"></nz-statistic>
+          <nz-statistic [nzValue]="(overviewData?.totalMoney | number: '1.0-2')!" [nzTitle]="'Tổng doanh thu (VNĐ)'"></nz-statistic>
         </nz-col>
         <nz-col [nzSpan]="8">
           <nz-statistic
-              [nzValue]="(11.28 | number: '1.0-2')!"
+              [nzValue]="(overviewData?.growth | number: '1.0-2')!"
               [nzTitle]="'Tăng trưởng'"
-              [nzPrefix]="prefixTplOne"
+              [nzPrefix]="getGrowthTemplate(overviewData?.growth)"
               [nzSuffix]="'%'"
               [nzValueStyle]="{ color: '#3F8600' }"
             ></nz-statistic>
             <ng-template #prefixTplOne><span nz-icon nzType="arrow-up"></span></ng-template>
+            <ng-template #prefixTplTwo><span nz-icon nzType="arrow-down"></span></ng-template>
         </nz-col>
         <nz-col [nzSpan]="8">
-          <nz-statistic [nzValue]="(2019.111 | number: '1.0-2')!" [nzTitle]="'Số lượt đánh giá'"></nz-statistic>
+          <nz-statistic [nzValue]="(overviewData?.rateCount | number: '1.0-2')!" [nzTitle]="'Số lượt đánh giá'"></nz-statistic>
         </nz-col>
         <nz-col [nzSpan]="8">
-          <nz-statistic [nzValue]="(2019.111 | number: '1.0-2')!" [nzTitle]="'Tỷ lệ đánh giá trung bình'"></nz-statistic>
+          <nz-statistic [nzValue]="(overviewData?.avgRating | number: '1.0-2')!" [nzTitle]="'Tỷ lệ đánh giá trung bình'"></nz-statistic>
         </nz-col>
       </nz-row>
     </div>
     <div class="transit-container">
-
+      <div class="header">
+        <div style="    font-weight: 500;font-size: 16px;padding: 10px 0 0 20px;">Thống kê sản phẩm theo tháng</div>
+      </div>
+      <ng-container *ngIf="!isLoadingProductStatiticData">
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <div id="chart">
+            <apx-chart
+              [series]="chartOptions?.series"
+              [chart]="chartOptions?.chart"
+              [dataLabels]="chartOptions?.dataLabels"
+              [plotOptions]="chartOptions?.plotOptions"
+              [xaxis]="chartOptions?.xaxis"
+              [yaxis]="chartOptions?.yaxis"
+            ></apx-chart>
+          </div>
+          <div>
+            <nz-pagination [(nzPageIndex)]="pageIndex" [nzTotal]="total" [nzPageSize]="pageSize" (nzPageIndexChange)="updateChart()"></nz-pagination>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="isLoadingProductStatiticData">
+        <span nz-icon nzType="loading" nzTheme="outline"></span>
+      </ng-container>
     </div>
   </div>
 
   <div class="content-container">
+    <div >
+      <div style="font-weight: 500;font-size: 16px;padding: 10px 0 0 20px;"> Doanh thu {{displayYear}}</div>
+      <nz-radio-group style="margin-left: 20px;" [(ngModel)]="year" nzButtonStyle="solid" (ngModelChange)="getYearlyRevenue()">
+        <label nz-radio-button nzValue="lastyear">Năm ngoái</label>
+        <label nz-radio-button nzValue="thisyear">Năm nay</label>
+      </nz-radio-group>
+    </div>
 
+    <div id="chart1">
+      <apx-chart
+        [series]="yearChartOptions?.series"
+        [chart]="yearChartOptions?.chart"
+        [dataLabels]="yearChartOptions?.dataLabels"
+        [xaxis]="yearChartOptions?.xaxis"
+        [fill]="yearChartOptions?.fill"
+      ></apx-chart>
   </div>
 </div>

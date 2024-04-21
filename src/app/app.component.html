@@ -39,7 +39,7 @@
         <div class="title">{{titleComponent}}</div>
         <div class="user-profile" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
           <div class="image">
-            <img width="30" height="30" src="/assets/img/logo.png" alt="">
+            <img width="30" height="30" [src]="authUser.picture" alt="">
           </div>
           <div class="name">Trần Nam Dương</div>
           <span nz-icon nzType="down" nzTheme="outline"></span>
