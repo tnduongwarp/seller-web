@@ -5,7 +5,9 @@ import { NZ_MODAL_DATA, NzModalService } from 'ng-zorro-antd/modal';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { BaseComponent } from 'src/app/base/base.component';
 import { Const } from 'src/app/const/const';
+import { FileUpload } from 'src/app/models/file-upload.model';
 import { getBase64 } from 'src/app/product-detail/product-detail.component';
+import { FileUploadService } from 'src/app/service/upload-file.service';
 
 export interface ModalData{
   refreshData: () => void;
@@ -45,7 +47,7 @@ export class CreateProductModal extends BaseComponent{
     }
   ];
 
-  constructor(@Inject(NZ_MODAL_DATA) public  dataInput: ModalData, private fb: NonNullableFormBuilder, private message: NzMessageService){
+  constructor(@Inject(NZ_MODAL_DATA) public  dataInput: ModalData, private fb: NonNullableFormBuilder, private message: NzMessageService, private uploadService: FileUploadService){
     super();
     for(let control of this.controlArray){
       this.validateForm.addControl(`${control.field}`, this.fb.control(''));
@@ -71,7 +73,7 @@ export class CreateProductModal extends BaseComponent{
     this.previewVisible = true;
   };
   save(){
-    if(this.fileList.length > 2) return this.message.error('Bạn chỉ có thể upload nhiều nhất 2 ảnh')
+    if(this.fileList.length < 1) return this.message.error('Bạn cần upload ít nhất 1 ảnh')
     const id = JSON.parse(localStorage.getItem('user')!)._id
     const body = {
       owner: id,
@@ -82,19 +84,17 @@ export class CreateProductModal extends BaseComponent{
       title: this.validateForm.value['title'],
       image: ''
     };
-    const formData = new FormData();
-    let image = '';
+    const fileUploads: FileUpload[] = [];
     for(let file of this.fileList){
       if(file?.originFileObj){
-        formData.append('upload_files',file.originFileObj, file.originFileObj?.name);
-        image+= `/assets/img/${file.originFileObj?.name},`
+        const fileUpload = new FileUpload(file?.originFileObj);
+        fileUploads.push(fileUpload);
       }
     };
-    console.log(formData.getAll('files'))
-    this.api.post(`${Const.API_SAVE_IMAGE}`, formData).then(
-      (res: any) => {
-        console.log(res)
-        body['image'] = image.slice(0,-1);
+    this.uploadService.pushFilesToStorage(fileUploads).subscribe({
+      next: (res) => {
+        let imageArr = fileUploads.map(it => it.url)
+        body['image'] = imageArr.join(',');
         this.api.post(`${Const.API_GET_LIST_PRODUCT}`, body).then(
           (res: any) => {
             this.message.success('thêm thành công');
@@ -104,9 +104,8 @@ export class CreateProductModal extends BaseComponent{
           console.log(err)
           this.message.error(err.error.message)
         })
-      }
-    ).catch((err: any) => {
-      this.message.error('Có lỗi xảy ra, vui lòng thử lại')
+      },
+      error: (err: any) => {this.message.error('Có lỗi xảy ra, vui lòng thử lại')}
     })
   }
 }

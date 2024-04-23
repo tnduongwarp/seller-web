@@ -1,0 +1,56 @@
+<div>
+  <div style="margin-bottom: 30px; display: flex; justify-content: space-between;">
+    <button nz-button nzType="default">
+      <span nz-icon nzType="plus"></span>
+      Thêm sản phẩm
+    </button>
+    <nz-select  nzAllowClear="false" nzPlaceHolder="Chọn vai trò" [(ngModel)]="role" (ngModelChange)="getData()">
+      <nz-option nzLabel="Người dùng" nzValue="user"></nz-option>
+      <nz-option nzLabel="Nhà bán hàng" nzValue="seller"></nz-option>
+    </nz-select>
+  </div>
+  <nz-table #productTable
+    nzBordered
+    [nzData]="listOfDisplayData"
+    nzFrontPagination="false"
+    [nzTotal]="total"
+    nzPageSize="10"
+    [nzLoading]="isLoading"
+    >
+    <thead>
+      <tr>
+        <th nzWidth="25%" nzCustomFilter >Email
+          <nz-input-group [nzSuffix]="suffixIconSearch">
+            <input type="text" nz-input  placeholder="Search name" [(ngModel)]="searchValue" (ngModelChange)="search()"/>
+          </nz-input-group>
+          <ng-template #suffixIconSearch>
+            <span nz-icon nzType="search"></span>
+          </ng-template>
+        </th>
+        <th nzWidth="15%">Tên</th>
+        <th nzWidth="15%" >Ngày sinh</th>
+        <th nzWidth="15%">Số điện thoại</th>
+        <th nzWidth="15%" >Ngày tạo</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of productTable.data">
+          <td><a href="mailto:{{data.email}}">{{ data?.email || 'N/A'}}</a></td>
+          <td>{{ getUsername(data) }}</td>
+          <td >{{ formatDateOfBirth(data?.metadata?.dateOfBirth) }}</td>
+          <td>{{ data?.metadata?.phone || 'N/A' }}</td>
+          <td>{{ formatDate(data.created) }}</td>
+          <td>
+            <a ><span nz-icon nzType="edit" nzTheme="outline"></span>
+            </a>
+            <span
+              nz-popconfirm
+              nzPopconfirmTitle="Bạn chắc chắn muốn xóa sản phẩm này chứ ?"
+              (nzOnConfirm)="deleteProduct(data._id)"
+               style="margin-left: 15px; cursor: pointer;" nz-icon nzType="delete" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'"></span>
+          </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

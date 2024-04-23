@@ -53,4 +53,16 @@ export class BaseComponent implements OnChanges, OnInit, DoCheck, AfterContentIn
     if(user.lastname) return user.lastname;
     return 'N/A'
   }
+  protected  formatDateOfBirth(day: string){
+    if(!day) return 'N/A'
+    let date = new Date(day);
+    return format(date, 'dd/MM/yyyy')
+  }
+
+  getFileNameFromFileUrl(url: string){
+    let part1 = url?.split('?')[0];
+    let name = part1.split('%2F');
+    if(name.length!=2) return ''
+    return name[1]
+  }
 }

@@ -6,6 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
 import { FormControl, FormRecord, NonNullableFormBuilder } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { FileUploadService } from '../service/upload-file.service';
+import { FileUpload } from '../models/file-upload.model';
+import { forkJoin, last, merge } from 'rxjs';
 
 export const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -61,7 +64,12 @@ export class ProductDetailComponent extends BaseComponent{
     }
   ];
   originalFileList: NzUploadFile[] = [];
-  constructor(public activatedRoute: ActivatedRoute, private fb: NonNullableFormBuilder, public message: NzMessageService){
+  constructor(
+    public activatedRoute: ActivatedRoute,
+    private fb: NonNullableFormBuilder,
+    public message: NzMessageService,
+    private uploadService: FileUploadService
+  ){
     super();
   }
   override ngOnInit(): void {
@@ -74,7 +82,6 @@ export class ProductDetailComponent extends BaseComponent{
       this.isLoading = true;
       this.api.get(`${Const.API_GET_LIST_PRODUCT}/${id}`).then(
         (res: any) => {
-          console.log(res.data);
           this.product = res.data;
           for(let rv of res.data.reviews){
             this.replyModel[rv._id] = rv.reply;
@@ -129,37 +136,58 @@ export class ProductDetailComponent extends BaseComponent{
   }
 
   async save(){
-    console.log('fileList', this.fileList);
-    let newfiles = this.fileList.filter(it => it?.originFileObj);
-    if(newfiles.length > 2) return this.message.error('Bạn chỉ có thể upload thêm nhiều nhất 2 ảnh')
-    let fileNameList = this.fileList.map(it => it.name);
+    let fileUrlList = this.fileList.map(it => it.url);
     let formValue: any = {...this.validateForm.value, deleteImages: [], addImage:[]};
-    const formData = new FormData();
+    const fileUploads: FileUpload[] = [];
+    const fileDelete: string[] = [];
+    const promises: any = [];
     for(let file of this.fileList){
       if(file?.originFileObj){
-        formData.append('files',file.originFileObj, file.originFileObj?.name);
-        formValue.addImage.push(file.originFileObj?.name)
+        // formData.append('files',file.originFileObj, file.originFileObj?.name);
+        // formValue.addImage.push(file.originFileObj?.name)
+        const fileUpload = new FileUpload(file?.originFileObj);
+        fileUploads.push(fileUpload);
       }
     }
     for(let file of this.originalFileList){
-      if(!fileNameList.includes(file.name)) formValue['deleteImages'].push(file.name);
+      if(!fileUrlList.includes(file.url)) {
+        let fileName = this.getFileNameFromFileUrl(file.name);
+        if(fileName) this.uploadService.deleteFileStorage(fileName)
+        fileDelete.push(file.name)
+      }
     }
-    console.log(formValue)
-
-    let qs = new URLSearchParams(formValue).toString();
-    console.log(qs);
+    formValue.deleteImages = fileDelete;
     this.isLoading = true;
-    this.api.post(`${Const.API_GET_LIST_PRODUCT}/update/${this.product._id}?${qs}`, formData)
-    .then(res=> {
-      this.isLoading = false;
-      this.correctStatusFileList();
-      this.message.success('Lưu thành công')
-    })
-    .catch(err => {
-      console.log(err);
-      this.isLoading = false
-      this.message.error('Có lỗi xảy ra')
-    })
+    if(fileUploads.length){
+      this.uploadService.pushFilesToStorage(fileUploads).subscribe(res => {
+        formValue.addImage = fileUploads.map(it => it.url);
+        this.api.post(`${Const.API_GET_LIST_PRODUCT}/update/${this.product._id}`, formValue)
+        .then(res=> {
+          this.isLoading = false;
+          this.correctStatusFileList();
+          this.message.success('Lưu thành công')
+        })
+        .catch(err => {
+          console.log(err);
+          this.isLoading = false
+          this.message.error('Có lỗi xảy ra')
+        })
+      })
+    }else{
+      this.api.post(`${Const.API_GET_LIST_PRODUCT}/update/${this.product._id}`, formValue)
+      .then(res=> {
+        this.isLoading = false;
+        this.correctStatusFileList();
+        this.message.success('Lưu thành công')
+      })
+      .catch(err => {
+        console.log(err);
+        this.isLoading = false
+        this.message.error('Có lỗi xảy ra')
+      })
+    }
+
+
   }
 
   correctStatusFileList(){

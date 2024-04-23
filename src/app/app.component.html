@@ -13,7 +13,7 @@
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <ng-container *ngFor="let item of sidebar">
-        <li *ngIf="item.children && item.children.length" nz-submenu nzOpen [nzTitle]="item.name" [nzIcon]="item.icon">
+        <li *ngIf="item.children && item.children.length " nz-submenu nzOpen [nzTitle]="item.name" [nzIcon]="item.icon">
           <ul>
             <li *ngFor="let child of item.children" nz-menu-item nzMatchRouter>
               <a [routerLink]="child.link" (click)="setTitleComponent(child.name)">{{child.name}}</a>
@@ -41,7 +41,7 @@
           <div class="image">
             <img width="30" height="30" [src]="authUser.picture" alt="">
           </div>
-          <div class="name">Trần Nam Dương</div>
+          <div class="name">{{getUsername(this.authUser)}}</div>
           <span nz-icon nzType="down" nzTheme="outline"></span>
         </div>
       </div>

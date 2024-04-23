@@ -67,7 +67,12 @@ import { ChangeStatusComponent } from './modals/change-status/change-status.comp
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { UserComponent } from './user/user.component';
 
+import { AngularFireModule } from '@angular/fire/compat';
+// import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { environment } from '../environments/environment';
 registerLocaleData(en);
 
 export class MyIntl extends TimeagoIntl {
@@ -90,7 +95,8 @@ export class MyIntl extends TimeagoIntl {
     ReceiverComponent,
     OrderComponent,
     OrderDetailComponent,
-    ChangeStatusComponent
+    ChangeStatusComponent,
+    UserComponent
   ],
   imports: [
     TimeagoModule.forRoot({
@@ -141,6 +147,9 @@ export class MyIntl extends TimeagoIntl {
     NzDescriptionsModule,
     NzStatisticModule,
     NgApexchartsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    // AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
   providers: [RestApiService, AuthGuardService,
     { provide: NZ_I18N, useValue: en_US },

@@ -10,6 +10,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { OrderComponent } from './order/order.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,11 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'user',
+    component: UserComponent,
     canActivate: [AuthGuardService],
   },
   {

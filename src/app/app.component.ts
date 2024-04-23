@@ -70,10 +70,12 @@ export class AppComponent extends BaseComponent{
       name: 'Quản lí cửa hàng',
       icon: 'shop',
       link:'',
+      requireRole:['seller'],
       children: [
         {
           name: 'Quản lí sản phẩm',
-          link: '/product'
+          link: '/product',
+
         },
         {
           name: 'Quản lí đơn hàng',
@@ -92,7 +94,14 @@ export class AppComponent extends BaseComponent{
     {
       name: 'Hồ sơ',
       icon: 'user',
-      link: '/profile'
+      link: '/profile',
+      requireRole:['seller','admin']
+    },
+    {
+      name: 'Quản lí người dùng',
+      icon: 'team',
+      link: '/user',
+      requireRole:['admin']
     }
   ];
   logOut(){
@@ -130,6 +139,10 @@ export class AppComponent extends BaseComponent{
       nzOnCancel:() => this.deleteMessageModal() ,
       nzContent: ChatComponent,
     })
+  }
+
+  hasRequireRole(item: any){
+    return item?.requireRole?.includes(this.authUser?.role)
   }
 
 }
