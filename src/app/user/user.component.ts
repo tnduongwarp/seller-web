@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
 import { Const } from '../const/const';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { CreateUserComponent } from '../modals/create-user/create-user.component';
 
 @Component({
   selector: 'app-user',
@@ -18,7 +20,7 @@ export class UserComponent extends BaseComponent{
   searchValue: string = '';
   listOfDisplayData: any = [];
   isLoading: boolean = false;
-  constructor(){
+  constructor(private modal: NzModalService){
     super();
   }
   override ngOnInit(): void {
@@ -51,5 +53,26 @@ export class UserComponent extends BaseComponent{
 
   search(): void {
     this.listOfDisplayData = this.listData.filter((item: any) => item.email.indexOf(this.searchValue) !== -1);
+  }
+
+  getRouterLink(item: any){
+    return `/user/${item._id}`;
+  }
+  deleteUser(user: any){
+    this.api.post(`${Const.API_USER}/${user._id}`,{isDelete: true}).then(
+      res => {
+        this.getData();
+      }
+    )
+  }
+
+  openCreateUserDialog(){
+    this.modal.create({
+      nzContent: CreateUserComponent,
+      nzTitle: 'Tạo tài khoản',
+      nzData:{
+        refreshData:() => this.getData()
+      }
+    })
   }
 }

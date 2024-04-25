@@ -11,6 +11,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { OrderComponent } from './order/order.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { UserComponent } from './user/user.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,11 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'user/:id',
+    component: UserDetailComponent,
     canActivate: [AuthGuardService],
   },
   {

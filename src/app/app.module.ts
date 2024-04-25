@@ -73,6 +73,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 // import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from '../environments/environment';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { CreateUserComponent } from './modals/create-user/create-user.component';
 registerLocaleData(en);
 
 export class MyIntl extends TimeagoIntl {
@@ -96,7 +98,9 @@ export class MyIntl extends TimeagoIntl {
     OrderComponent,
     OrderDetailComponent,
     ChangeStatusComponent,
-    UserComponent
+    UserComponent,
+    UserDetailComponent,
+    CreateUserComponent
   ],
   imports: [
     TimeagoModule.forRoot({

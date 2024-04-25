@@ -1,8 +1,8 @@
 <div>
   <div style="margin-bottom: 30px; display: flex; justify-content: space-between;">
-    <button nz-button nzType="default">
+    <button nz-button nzType="default" (click)="openCreateUserDialog()">
       <span nz-icon nzType="plus"></span>
-      Thêm sản phẩm
+      Thêm tài khoản
     </button>
     <nz-select  nzAllowClear="false" nzPlaceHolder="Chọn vai trò" [(ngModel)]="role" (ngModelChange)="getData()">
       <nz-option nzLabel="Người dùng" nzValue="user"></nz-option>
@@ -42,12 +42,12 @@
           <td>{{ data?.metadata?.phone || 'N/A' }}</td>
           <td>{{ formatDate(data.created) }}</td>
           <td>
-            <a ><span nz-icon nzType="edit" nzTheme="outline"></span>
+            <a [routerLink]="getRouterLink(data)"><span nz-icon nzType="edit" nzTheme="outline"></span>
             </a>
             <span
               nz-popconfirm
-              nzPopconfirmTitle="Bạn chắc chắn muốn xóa sản phẩm này chứ ?"
-              (nzOnConfirm)="deleteProduct(data._id)"
+              nzPopconfirmTitle="Bạn chắc chắn muốn xóa tài khoản này chứ ?"
+              (nzOnConfirm)="deleteUser(data)"
                style="margin-left: 15px; cursor: pointer;" nz-icon nzType="delete" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'"></span>
           </td>
       </tr>

@@ -1,0 +1,36 @@
+<div class="container">
+  <div *ngIf="!isLoading" class="content-container">
+    <div nz-row [nzGutter]="[16, 16]">
+      <div nz-col nzSpan="12">
+        <div class="label">Email <span class="label-mark-required"></span></div>
+        <input nz-input placeholder="Email" [(ngModel)]="email" [disabled]="!isEditting">
+      </div>
+      <div nz-col nzSpan="12">
+        <div class="label">Vai trò  <span class="label-mark-required"></span></div>
+        <input *ngIf="!isEditting" nz-input placeholder="Chọn một vai trò" [(ngModel)]="role" disabled>
+        <nz-select *ngIf="isEditting" style="width: 100%;"  nzAllowClear="false" nzPlaceHolder="Chọn vai trò" [(ngModel)]="role">
+          <nz-option nzLabel="Người dùng" nzValue="user"></nz-option>
+          <nz-option nzLabel="Nhà bán hàng" nzValue="seller"></nz-option>
+          <nz-option nzLabel="Quản trị hệ thống" nzValue="admin"></nz-option>
+        </nz-select>
+      </div>
+      <div nz-col nzSpan="12">
+        <div class="label">Họ  <span class="label-mark-required"></span></div>
+        <input nz-input placeholder="Họ" [(ngModel)]="firstName" [disabled]="!isEditting">
+      </div>
+      <div nz-col nzSpan="12">
+        <div class="label">Tên  <span class="label-mark-required"></span></div>
+        <input nz-input placeholder="Tên" [(ngModel)]="lastName" [disabled]="!isEditting">
+      </div>
+      <div nz-col nzSpan="12">
+        <div class="label">Ngày tạo  <span class="label-mark-required"></span></div>
+        <input nz-input [value]="formatDate(created)" disabled>
+      </div>
+    </div>
+  </div>
+  <div class="button">
+      <button *ngIf="isEditting" style="width: 200px;" nz-button nzType="default" (click)="isEditting = !isEditting">Quay lại</button>
+      <button  *ngIf="!isEditting" style="width: 200px;" nz-button nzType="primary" (click)="isEditting = !isEditting">Sửa</button>
+      <button  *ngIf="isEditting" style="width: 200px;" nz-button nzType="primary" (click)="onSave()">Lưu</button>
+  </div>
+</div>

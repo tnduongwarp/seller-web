@@ -13,14 +13,14 @@
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <ng-container *ngFor="let item of sidebar">
-        <li *ngIf="item.children && item.children.length " nz-submenu nzOpen [nzTitle]="item.name" [nzIcon]="item.icon">
+        <li *ngIf="item.children && item.children.length && hasRequireRole(item)" nz-submenu nzOpen [nzTitle]="item.name" [nzIcon]="item.icon">
           <ul>
             <li *ngFor="let child of item.children" nz-menu-item nzMatchRouter>
               <a [routerLink]="child.link" (click)="setTitleComponent(child.name)">{{child.name}}</a>
             </li>
           </ul>
         </li>
-        <li *ngIf="!item.children || !item.children.length" [routerLink]="item.link" nz-menu-item nzMatchRouter (click)="setTitleComponent(item.name)">
+        <li *ngIf="(!item.children || !item.children.length) && hasRequireRole(item)" [routerLink]="item.link" nz-menu-item nzMatchRouter (click)="setTitleComponent(item.name)">
           <span nz-icon [nzType]="item.icon"></span>
           <span >{{item.name}}</span>
         </li>

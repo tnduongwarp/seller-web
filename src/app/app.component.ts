@@ -98,7 +98,7 @@ export class AppComponent extends BaseComponent{
       requireRole:['seller','admin']
     },
     {
-      name: 'Quản lí người dùng',
+      name: 'Quản lí tài khoản',
       icon: 'team',
       link: '/user',
       requireRole:['admin']
