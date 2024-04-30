@@ -1,0 +1,63 @@
+<div>
+  <div style="margin-bottom: 30px; display: flex; justify-content: space-between;">
+    <!-- <button nz-button nzType="default" (click)="createProduct()">
+      <span nz-icon nzType="plus"></span>
+      Thêm sản phẩm
+    </button> -->
+    <nz-select  nzAllowClear="false" nzPlaceHolder="Chọn loại sản phẩm" [(ngModel)]="productType" (ngModelChange)="getData()">
+      <nz-option nzLabel="Đã được phê duyệt" nzValue="0"></nz-option>
+      <nz-option nzLabel="Đang chờ phê duyệt" nzValue="1"></nz-option>
+    </nz-select>
+  </div>
+  <nz-table #productTable
+    nzBordered
+    [nzData]="listOfDisplayData"
+    nzFrontPagination="true"
+    [nzTotal]="this.listOfDisplayData.length"
+    nzPageSize="10"
+    [nzLoading]="isLoading"
+    >
+    <thead>
+      <tr>
+        <th nzWidth="25%" nzCustomFilter >Tên sản phẩm
+          <nz-input-group [nzSuffix]="suffixIconSearch">
+            <input type="text" nz-input  placeholder="Search name" [(ngModel)]="searchValue" (ngModelChange)="search()"/>
+          </nz-input-group>
+          <ng-template #suffixIconSearch>
+            <span nz-icon nzType="search"></span>
+          </ng-template>
+        </th>
+        <th>Cửa hàng</th>
+        <th [(nzSortOrder)]="amountSort" [nzSortFn]="sortAmount">Số lượng</th>
+        <th  [(nzSortOrder)]="soldSort" [nzSortFn]="sortSold">Đã bán</th>
+        <th>Giá</th>
+        <th  [(nzSortOrder)]="createdSort" [nzSortFn]="sortCreated">Ngày đăng</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of productTable.data">
+          <td><a [routerLink]="getRouterLink(data)">{{ data.title }}</a></td>
+          <td>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <img [src]="data.owner.picture" class="image">
+              <div>{{data.owner.shopName || 'N/A'}}</div>
+            </div>
+          </td>
+          <td>{{ data.amount }}</td>
+          <td style="color: rgb(10, 240, 10); font-weight: bold;">{{ data.sold }}</td>
+          <td>{{ convertNumberToCurrency(data.price) }}</td>
+          <td>{{ formatDate(data.created) }}</td>
+          <td>
+            <a [routerLink]="getRouterLink(data)"><span nz-icon nzType="eye" nzTheme="outline"></span>
+            </a>
+            <span
+              nz-popconfirm
+              nzPopconfirmTitle="Bạn chắc chắn muốn xóa sản phẩm này chứ ?"
+              (nzOnConfirm)="deleteProduct(data._id)"
+               style="margin-left: 15px; cursor: pointer;" nz-icon nzType="delete" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'"></span>
+          </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

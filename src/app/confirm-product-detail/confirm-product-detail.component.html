@@ -1,0 +1,89 @@
+<div *ngIf="!isLoading" >
+  <form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
+    <div nz-row [nzGutter]="24">
+        <div *ngFor="let control of controlArray" nz-col [nzSpan]="8" >
+          <nz-form-item>
+            <nz-form-label [nzFor]="control.field">{{ control.label }}</nz-form-label>
+            <nz-form-control>
+              <input
+                nz-input
+                placeholder=""
+                [formControlName]="control.field"
+                [attr.id]="control.index"
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+    </div>
+    <div nz-row >
+      <nz-form-item style="width: 100%;">
+        <nz-form-label [nzFor]="'description'">Mô tả</nz-form-label>
+        <nz-form-control>
+          <textarea
+            nz-input
+            rows="6"
+            placeholder=""
+            [formControlName]="'description'"
+          ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </form>
+  <div class="clearfix">
+    <h4>Ảnh</h4>
+    <nz-upload
+      nzListType="picture-card"
+      [(nzFileList)]="fileList"
+      [nzShowButton]="false"
+    >
+      <!-- <div>
+        <span nz-icon nzType="plus"></span>
+        <div style="margin-top: 8px">Tải lên</div>
+      </div> -->
+    </nz-upload>
+    <nz-modal
+      [nzVisible]="previewVisible"
+      [nzContent]="modalContent"
+      [nzFooter]="null"
+      (nzOnCancel)="previewVisible = false"
+    >
+      <ng-template #modalContent>
+        <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+      </ng-template>
+    </nz-modal>
+  </div>
+  <div style="display: flex; justify-content: end; margin: 20px;">
+    <button nz-button nzType="primary" [nzLoading]="isAccepting" (click)="accept()">
+      <span nz-icon nzType="check" nzTheme="outline"></span>
+      Phê duyệt vào sàn
+    </button></div>
+  <div style="margin-top: 20px;">
+    <div>
+      <h4>Đánh giá : {{product?.avgRating || 0}} ({{product?.totalRate || 0}})</h4>
+    </div>
+    <hr>
+    <div class="reviews">
+      <div *ngFor="let review of product.reviews" class="review">
+        <div style="padding: 1rem;">
+          <div style="display: flex; align-items: center; ">
+            <img [src]="review.owner.picture" alt="" width="40px" class="rounded-circle">
+            <div style="font-size: 15px; font-weight: 500; margin-left: 3rem;">{{review.owner?.name || (review.owner.firstname+ ' ' + review.owner.lastname) }}</div>
+          </div>
+          <nz-rate style="transform: scale(0.7);" [ngModel]="review.rating" nzAllowHalf nzDisabled></nz-rate>
+          <p style="margin-top: 1rem;">{{ review.description }}</p>
+        </div>
+        <ng-container *ngIf="review.reply">
+          <div style="color: rgb(197, 189, 189);">
+            <span>Phản hồi: </span>
+            <span>{{review.reply}}</span>
+          </div>
+        </ng-container>
+        <nz-divider></nz-divider>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div *ngIf="isLoading">
+  <span nz-icon nzType="loading" nzTheme="outline"></span>
+</div>

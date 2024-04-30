@@ -102,6 +102,18 @@ export class AppComponent extends BaseComponent{
       icon: 'team',
       link: '/user',
       requireRole:['admin']
+    },
+    {
+      name: 'Thống kê',
+      icon: 'stock',
+      link: '/statitics',
+      requireRole:['admin']
+    },
+    {
+      name: 'Quản lí sản phẩm',
+      icon: 'shopping',
+      link: '/admin/product',
+      requireRole:['admin']
     }
   ];
   logOut(){

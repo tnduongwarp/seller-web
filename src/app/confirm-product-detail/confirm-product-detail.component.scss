@@ -1,0 +1,32 @@
+:host{
+  .ant-advanced-search-form {
+    padding: 24px;
+    background: #fbfbfb;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+  }
+
+  .clearfix{
+    padding: 20px 25px;
+    margin-top: 50px;
+    border: dashed 1px #b2b2b2;
+    border-radius: 10px;
+  }
+  .search-result-list {
+    margin-top: 16px;
+    border: 1px dashed #e9e9e9;
+    border-radius: 6px;
+    background-color: #fafafa;
+    min-height: 200px;
+    text-align: center;
+    padding-top: 80px;
+  }
+
+  [nz-form-label] {
+    overflow: visible;
+  }
+  ::ng-deep .ant-form-item-label>label{
+    min-width: 100px;
+    font-weight: 500;
+  }
+}

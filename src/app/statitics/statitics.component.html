@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="charts">
+    <div class="title">Trực quan doanh thu</div>
+    <nz-radio-group style="margin-left: 20px;" [(ngModel)]="year" nzButtonStyle="solid" (ngModelChange)="getChartData()">
+      <label nz-radio-button nzValue="lastyear">Năm ngoái</label>
+      <label nz-radio-button nzValue="thisyear">Năm nay</label>
+    </nz-radio-group>
+    <div class="chart" *ngIf="!isLoadingChartData">
+        <apx-chart
+          [series]="chartOptions?.series"
+          [chart]="chartOptions?.chart"
+          [dataLabels]="chartOptions?.dataLabels"
+          [xaxis]="chartOptions?.xaxis"
+          [fill]="chartOptions?.fill"
+        ></apx-chart>
+    </div>
+    <div class="title">Chi tiết</div>
+    <nz-radio-group style="margin-left: 20px;" [(ngModel)]="detailMonth" nzButtonStyle="solid" (ngModelChange)="getDetailData()">
+      <label nz-radio-button nzValue="lastMonth">Tháng trước</label>
+      <label nz-radio-button nzValue="thisMonth">Tháng này</label>
+    </nz-radio-group>
+    <div class="detail">
+      <nz-table #detailTable
+        [nzData]="detailData"
+      >
+        <thead>
+          <tr>
+            <th >Người bán</th>
+            <th >Doanh thu</th>
+            <th >Phí nền tảng(3% doanh thu)</th>
+            <th >Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of detailTable.data">
+            <td>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <img [src]="data.picture" class="image">
+                <div>{{data.name || 'N/A'}}</div>
+              </div>
+            </td>
+            <td>{{ convertNumberToCurrency(data.revenue) }}</td>
+            <td>{{ convertNumberToCurrency(data.revenue*0.03) }}</td>
+            <td>
+              <button nz-button (click)="sendEmail(data)" [nzLoading]="isSending[data._id]">
+                <span nz-icon nzType="send" nzTheme="outline"></span>
+                Send mail
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+  <div class="data">
+    <div class="title">Số liệu</div>
+    <div class="content" *ngIf="!isLoadingNumberData">
+      <nz-row [nzGutter]="[24,16]">
+        <nz-col [nzSpan]="12">
+          <nz-statistic [nzValue]="(numberData.totalUser | number)!" [nzTitle]="'Số người dùng'" [nzPrefix]="user"></nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="12">
+          <nz-statistic [nzValue]="numberData.userThisMonth" [nzTitle]="'Số người dùng mới tháng này'" [nzPrefix]="user"></nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="12">
+          <nz-statistic [nzValue]="(numberData.totalSeller | number)!" [nzTitle]="'Số người bán'" [nzPrefix]="shopper"></nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="12">
+          <nz-statistic [nzValue]="numberData.sellerThisMonth" [nzTitle]="'Số người bán mới tháng này'" [nzPrefix]="shopper"></nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="12">
+          <nz-statistic [nzValue]="(numberData.totalOrder | number)!" [nzTitle]="'Tổng đơn hàng'" [nzPrefix]="order"></nz-statistic>
+          <ng-template #order><span nz-icon nzType="shopping"></span></ng-template>
+        </nz-col>
+        <nz-col [nzSpan]="12">
+          <nz-statistic [nzValue]="(numberData.orderThisMonth | number)!" [nzTitle]="'Số đơn hàng tháng này'" [nzPrefix]="order"></nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="12">
+          <nz-statistic [nzValue]="numberData.totalRevenue | number" [nzTitle]="'Tổng doanh thu'" [nzPrefix]="wallet" [nzSuffix]="'VNĐ'"></nz-statistic>
+          <ng-template #wallet><span nz-icon nzType="wallet"></span></ng-template>
+        </nz-col>
+        <nz-col [nzSpan]="12">
+          <nz-statistic [nzValue]="(numberData.thisMonthRevenue | number)" [nzTitle]="'Doanh thu tháng này'" [nzPrefix]="wallet" [nzSuffix]="'VNĐ'"></nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="12">
+          <nz-statistic
+          [nzValue]="(numberData.growth | number: '1.0-2')!"
+          [nzTitle]="'Tăng trưởng'"
+          [nzPrefix]="prefixTplOne"
+          [nzSuffix]="'%'"
+          [nzValueStyle]="{ color: '#3F8600' }"
+        ></nz-statistic>
+        <ng-template #prefixTplOne><span nz-icon nzType="arrow-up"></span></ng-template>
+        <ng-template #prefixTplTwo><span nz-icon nzType="arrow-down"></span></ng-template>
+        </nz-col>
+        <!-- <nz-col [nzSpan]="12">
+          <nz-statistic [nzValue]="(1128 | number)!" [nzTitle]="'Feedback'" [nzPrefix]="prefixTpl"></nz-statistic>
+          <ng-template #prefixTpl><span nz-icon nzType="like"></span></ng-template>
+        </nz-col>
+        <nz-col [nzSpan]="12">
+          <nz-statistic [nzValue]="93" [nzTitle]="'Unmerged'" [nzSuffix]="'/ 100'"></nz-statistic>
+        </nz-col> -->
+      </nz-row>
+    </div>
+  </div>
+</div>
+<ng-template #user><span nz-icon nzType="user" nzTheme="outline"></span></ng-template>
+<ng-template #shopper><span nz-icon nzType="shop" nzTheme="outline"></span></ng-template>

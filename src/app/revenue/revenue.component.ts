@@ -167,7 +167,7 @@ export class RevenueComponent extends BaseComponent{
     else return this.down;
   }
 
-  public renderYearChart(data: number[]){;
+  public renderYearChart(data: number[]){
 
     this.yearChartOptions = {
       chart: {
