@@ -53,7 +53,7 @@
     </nz-modal>
   </div>
   <div style="display: flex; justify-content: end; margin: 20px;">
-    <button nz-button nzType="primary" [nzLoading]="isAccepting" (click)="accept()">
+    <button nz-button nzType="primary" [nzLoading]="isAccepting" (click)="accept()" [disabled]="isDisableAccepting()">
       <span nz-icon nzType="check" nzTheme="outline"></span>
       Phê duyệt vào sàn
     </button></div>

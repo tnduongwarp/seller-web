@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '../base/base.component';
-import { Const } from '../const/const';
+import { BaseComponent } from '../../base/base.component';
+import { Const } from '../../const/const';
 import { ActivatedRoute } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { ChangeStatusComponent } from '../modals/change-status/change-status.component';
+import { ChangeStatusComponent } from '../../modals/change-status/change-status.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { ChatComponent } from '../modals/chat/views/chat/chat.component';
+import { ChatComponent } from '../../modals/chat/views/chat/chat.component';
 
 @Component({
   selector: 'app-order-detail',

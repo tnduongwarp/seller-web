@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { BaseComponent } from '../base/base.component';
-import { Const } from '../const/const';
+import { BaseComponent } from '../../base/base.component';
+import { Const } from '../../const/const';
 import { ActivatedRoute } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
 import { FormControl, FormRecord, NonNullableFormBuilder } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { FileUploadService } from '../service/upload-file.service';
-import { FileUpload } from '../models/file-upload.model';
+import { FileUploadService } from '../../service/upload-file.service';
+import { FileUpload } from '../../models/file-upload.model';
 import { forkJoin, last, merge } from 'rxjs';
 
 export const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>

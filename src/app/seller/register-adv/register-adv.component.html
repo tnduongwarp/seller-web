@@ -1,0 +1,28 @@
+<div>
+    <nz-table #nzTable [nzData]="listData" nzTableLayout="fixed" nzFrontPagination="false" [nzScroll]="{ y: '300px' }" nzBordered="true">
+        <thead>
+          <tr>
+
+            <th nzWidth="60px"></th>
+            <th nzWidth="60px">XH</th>
+            <th>Tên cửa hàng</th>
+            <th>Giá</th>
+            <th>Thời gian</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let data of nzTable.data; let index = index">
+            <tr [ngClass]="{'top': index ==0 || index ==1 || index ==2}">
+              <td [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)"></td>
+              <td>{{index+1}}</td>
+              <td>{{ data.shopName }}</td>
+              <td>{{ data.price }}</td>
+              <td>{{ data.created }}</td>
+            </tr>
+            <tr [nzExpand]="expandSet.has(data.id)">
+              <span *ngFor="item of data.products">{{ item }}</span>
+            </tr>
+          </ng-container>
+        </tbody>
+    </nz-table>
+</div>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '../base/base.component';
+import { BaseComponent } from '../../base/base.component';
 import { ActivatedRoute } from '@angular/router';
-import { Const } from '../const/const';
+import { Const } from '../../const/const';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({

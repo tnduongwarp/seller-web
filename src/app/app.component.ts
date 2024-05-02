@@ -84,11 +84,7 @@ export class AppComponent extends BaseComponent{
         {
           name: 'Thống kê doanh số',
           link: '/revenue'
-        },
-        {
-          name: 'Đăng kí quảng cáo',
-          link: '/advertise'
-        },
+        }
       ]
     },
     {
@@ -114,6 +110,18 @@ export class AppComponent extends BaseComponent{
       icon: 'shopping',
       link: '/admin/product',
       requireRole:['admin']
+    },
+    {
+      name: 'Quản lí quảng cáo',
+      icon: 'account-book',
+      link: '/admin/advertisement',
+      requireRole:['admin']
+    },
+    {
+      name: 'Quản lí quảng cáo',
+      icon: 'account-book',
+      link: '/seller/advertisement',
+      requireRole:['seller']
     }
   ];
   logOut(){

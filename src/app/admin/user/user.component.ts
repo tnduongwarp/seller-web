@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '../base/base.component';
-import { Const } from '../const/const';
+import { BaseComponent } from '../../base/base.component';
+import { Const } from '../../const/const';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { CreateUserComponent } from '../modals/create-user/create-user.component';
+import { CreateUserComponent } from '../../modals/create-user/create-user.component';
 
 @Component({
   selector: 'app-user',

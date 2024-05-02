@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '../base/base.component';
+import { BaseComponent } from '../../base/base.component';
+import { Const } from '../../const/const';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { Const } from '../const/const';
-import { CreateProductModal } from '../modals/create-product/create-product.component';
+import { CreateProductModal } from '../../modals/create-product/create-product.component';
 
 @Component({
-  selector: 'app-confirm-product',
-  templateUrl: './confirm-product.component.html',
-  styleUrls: ['./confirm-product.component.scss']
+  selector: 'app-product',
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.scss']
 })
-export class ConfirmProductComponent extends BaseComponent{
+export class ProductComponent extends BaseComponent{
   public listData: any = [];
   searchValue: string = '';
   listOfDisplayData: any = [];
@@ -28,12 +28,13 @@ export class ConfirmProductComponent extends BaseComponent{
   }
   getData() {
     if(this.createProductModalInstance) this.createProductModalInstance.close();
+    let owner = JSON.parse(localStorage.getItem('user')!);
     this.isLoading = true;
     let filter: any = {
       type: this.productType
     };
     const qs = new URLSearchParams(filter).toString();
-    this.api.get(`${Const.API_SELLER}/admin/product?${qs}`).then(
+    this.api.get(`${Const.API_GET_LIST_PRODUCT}/getListForSeller/${owner._id}?${qs}`).then(
       (res: any) => {
         this.listData = res.data;
         this.listOfDisplayData = res.data;
@@ -68,7 +69,7 @@ export class ConfirmProductComponent extends BaseComponent{
   }
 
   getRouterLink(item: any){
-    return `/admin/product/${item._id}`
+    return `/product/${item._id}`
   }
 
   deleteProduct(id: string){

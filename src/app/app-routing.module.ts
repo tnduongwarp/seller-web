@@ -3,18 +3,19 @@ import { Routes, RouterModule } from '@angular/router';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './service/auth-guard.service';
-import { ProductComponent } from './product/product.component';
-import { RevenueComponent } from './revenue/revenue.component';
-import { AdvertisementComponent } from './advertisement/advertisement.component';
+import { ProductComponent } from './seller/product/product.component';
+import { RevenueComponent } from './seller/revenue/revenue.component';
+import { AdvertisementComponent } from './admin/advertisement/advertisement.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { OrderComponent } from './order/order.component';
-import { OrderDetailComponent } from './order-detail/order-detail.component';
-import { UserComponent } from './user/user.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
-import { StatiticsComponent } from './statitics/statitics.component';
-import { ConfirmProductComponent } from './confirm-product/confirm-product.component';
-import { ConfirmProductDetailComponent } from './confirm-product-detail/confirm-product-detail.component';
+import { ProductDetailComponent } from './seller/product-detail/product-detail.component';
+import { OrderComponent } from './seller/order/order.component';
+import { OrderDetailComponent } from './seller/order-detail/order-detail.component';
+import { UserComponent } from './admin/user/user.component';
+import { UserDetailComponent } from './admin/user-detail/user-detail.component';
+import { StatiticsComponent } from './admin/statitics/statitics.component';
+import { ConfirmProductComponent } from './admin/confirm-product/confirm-product.component';
+import { ConfirmProductDetailComponent } from './admin/confirm-product-detail/confirm-product-detail.component';
+import { RegisterAdvComponent } from './seller/register-adv/register-adv.component';
 
 const routes: Routes = [
   {
@@ -42,8 +43,8 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
-    path: 'advertise',
-    component: AdvertisementComponent,
+    path: 'seller/advertisement',
+    component: RegisterAdvComponent,
     canActivate: [AuthGuardService],
   },
   {
@@ -84,6 +85,11 @@ const routes: Routes = [
   {
     path: 'admin/product/:id',
     component: ConfirmProductDetailComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'admin/advertisement',
+    component: AdvertisementComponent,
     canActivate: [AuthGuardService],
   },
   {

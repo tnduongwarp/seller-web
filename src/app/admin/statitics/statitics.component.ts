@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { BaseComponent } from '../base/base.component';
-import { Const } from '../const/const';
+import { BaseComponent } from '../../base/base.component';
+import { Const } from '../../const/const';
 import { ChartComponent } from 'ng-apexcharts';
-import { ChartOptions } from '../revenue/revenue.component';
+import { ChartOptions } from '../../seller/revenue/revenue.component';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 interface NumberData{

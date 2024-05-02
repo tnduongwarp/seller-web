@@ -47,37 +47,38 @@ import { RouterModule } from '@angular/router';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 import { ForgotPWForm } from './modals/forgot-pw';
-import { ProductComponent } from './product/product.component';
-import { AdvertisementComponent } from './advertisement/advertisement.component';
-import { RevenueComponent } from './revenue/revenue.component';
+import { ProductComponent } from './seller/product/product.component';
+import { AdvertisementComponent } from './admin/advertisement/advertisement.component';
+import { RevenueComponent } from './seller/revenue/revenue.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductDetailComponent } from './seller/product-detail/product-detail.component';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { CreateProductModal } from './modals/create-product/create-product.component';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { ChannelComponent } from './modals/chat/views/channel/channel.component';
 import { ChatComponent } from './modals/chat/views/chat/chat.component';
 import { ReceiverComponent } from './modals/chat/views/receiver/receiver.component';
-import { OrderComponent } from './order/order.component';
+import { OrderComponent } from './seller/order/order.component';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { OrderDetailComponent } from './seller/order-detail/order-detail.component';
 import { ChangeStatusComponent } from './modals/change-status/change-status.component';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { UserComponent } from './user/user.component';
+import { UserComponent } from './admin/user/user.component';
 
 import { AngularFireModule } from '@angular/fire/compat';
 // import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from '../environments/environment';
-import { UserDetailComponent } from './user-detail/user-detail.component';
+import { UserDetailComponent } from './admin/user-detail/user-detail.component';
 import { CreateUserComponent } from './modals/create-user/create-user.component';
-import { StatiticsComponent } from './statitics/statitics.component';
-import { ConfirmProductComponent } from './confirm-product/confirm-product.component';
-import { ConfirmProductDetailComponent } from './confirm-product-detail/confirm-product-detail.component';
+import { StatiticsComponent } from './admin/statitics/statitics.component';
+import { ConfirmProductComponent } from './admin/confirm-product/confirm-product.component';
+import { ConfirmProductDetailComponent } from './admin/confirm-product-detail/confirm-product-detail.component';
+import { RegisterAdvComponent } from './seller/register-adv/register-adv.component';
 registerLocaleData(en);
 
 export class MyIntl extends TimeagoIntl {
@@ -106,7 +107,8 @@ export class MyIntl extends TimeagoIntl {
     CreateUserComponent,
     StatiticsComponent,
     ConfirmProductComponent,
-    ConfirmProductDetailComponent
+    ConfirmProductDetailComponent,
+    RegisterAdvComponent
   ],
   imports: [
     TimeagoModule.forRoot({

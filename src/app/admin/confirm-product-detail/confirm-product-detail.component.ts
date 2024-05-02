@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FormControl, FormRecord, NonNullableFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { BaseComponent } from '../base/base.component';
+import { BaseComponent } from '../../base/base.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Const } from '../const/const';
+import { Const } from '../../const/const';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -113,7 +113,8 @@ export class ConfirmProductDetailComponent extends BaseComponent{
     this.api.get(`${Const.API_GET_LIST_PRODUCT}/accept/${id}`).then(
       res => {
         this.isAccepting = false;
-        this.message.success('Sản phẩm đã được phê duyệt')
+        this.message.success('Sản phẩm đã được phê duyệt');
+        this.product.status = 'accepted'
       }
     ).catch(err => {
       this.isAccepting = false;
@@ -121,4 +122,8 @@ export class ConfirmProductDetailComponent extends BaseComponent{
     })
   }
 
+  isDisableAccepting(){
+    if(this.product.status === 'created') return false;
+    return true
+  }
 }

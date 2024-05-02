@@ -14,7 +14,7 @@
     [nzData]="listOfDisplayData"
     nzFrontPagination="true"
     [nzTotal]="this.listOfDisplayData.length"
-    nzPageSize="10"
+    nzPageSize="5"
     [nzLoading]="isLoading"
     >
     <thead>
@@ -54,10 +54,16 @@
             <span
               nz-popconfirm
               nzPopconfirmTitle="Bạn chắc chắn muốn xóa sản phẩm này chứ ?"
-              (nzOnConfirm)="deleteProduct(data._id)"
+              (nzOnConfirm)="showDeleteDialog(data._id)"
                style="margin-left: 15px; cursor: pointer;" nz-icon nzType="delete" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'"></span>
           </td>
       </tr>
     </tbody>
   </nz-table>
 </div>
+<nz-modal [(nzVisible)]="shouldShowDeleteDialog" nzTitle="Xóa sản phẩm" [nzCancelText]="'Thoát'" [nzOkText]="'Xác nhận'"  (nzOnOk)="deleteProduct(chosenProduct)" (nzOnCancel)="closeModal()">
+  <ng-container *nzModalContent>
+    <div style="font-weight: 500;">Lý do:</div>
+    <input nz-input [(ngModel)]="reason" placeholder="Hãy điền lý do giải thích cho người bán">
+  </ng-container>
+</nz-modal>

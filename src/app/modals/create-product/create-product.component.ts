@@ -6,7 +6,7 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { BaseComponent } from 'src/app/base/base.component';
 import { Const } from 'src/app/const/const';
 import { FileUpload } from 'src/app/models/file-upload.model';
-import { getBase64 } from 'src/app/product-detail/product-detail.component';
+import { getBase64 } from 'src/app/seller/product-detail/product-detail.component';
 import { FileUploadService } from 'src/app/service/upload-file.service';
 
 export interface ModalData{

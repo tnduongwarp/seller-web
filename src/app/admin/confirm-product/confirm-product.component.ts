@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '../base/base.component';
-import { Const } from '../const/const';
+import { BaseComponent } from '../../base/base.component';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { CreateProductModal } from '../modals/create-product/create-product.component';
+import { Const } from '../../const/const';
+import { CreateProductModal } from '../../modals/create-product/create-product.component';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  selector: 'app-confirm-product',
+  templateUrl: './confirm-product.component.html',
+  styleUrls: ['./confirm-product.component.scss']
 })
-export class ProductComponent extends BaseComponent{
+export class ConfirmProductComponent extends BaseComponent{
   public listData: any = [];
   searchValue: string = '';
   listOfDisplayData: any = [];
@@ -19,7 +20,10 @@ export class ProductComponent extends BaseComponent{
   isLoading: boolean = false;
   createProductModalInstance: any = null;
   productType = '0';
-  constructor(private modalService: NzModalService){
+  shouldShowDeleteDialog: boolean = false;
+  chosenProduct: string = '';
+  reason: string = '';
+  constructor(private modalService: NzModalService, private message: NzMessageService){
     super();
   }
 
@@ -28,13 +32,12 @@ export class ProductComponent extends BaseComponent{
   }
   getData() {
     if(this.createProductModalInstance) this.createProductModalInstance.close();
-    let owner = JSON.parse(localStorage.getItem('user')!);
     this.isLoading = true;
     let filter: any = {
       type: this.productType
     };
     const qs = new URLSearchParams(filter).toString();
-    this.api.get(`${Const.API_GET_LIST_PRODUCT}/getListForSeller/${owner._id}?${qs}`).then(
+    this.api.get(`${Const.API_SELLER}/admin/product?${qs}`).then(
       (res: any) => {
         this.listData = res.data;
         this.listOfDisplayData = res.data;
@@ -69,28 +72,26 @@ export class ProductComponent extends BaseComponent{
   }
 
   getRouterLink(item: any){
-    return `/product/${item._id}`
+    return `/admin/product/${item._id}`
   }
 
   deleteProduct(id: string){
-    this.api.post(`${Const.API_SELLER}/delete-product/${id}`, {})
-    .then(res => this.getData())
-    .catch(err => console.log(err))
+    console.log(id, this.reason)
+    this.api.post(`${Const.API_SELLER}/delete-product/${id}`, {reason: this.reason})
+    .then(res => {
+      this.closeModal()
+      this.getData()
+  } )
+    .catch(err => this.message.error('Có lỗi xảy ra, vui lòng thử lại sau'))
   }
 
-  createProduct(){
-    this.createProductModalInstance = this.modalService.create({
-      nzContent: CreateProductModal,
-      nzWidth: '100vw',
-      nzTitle:'Thông tin sản phẩm',
-      nzFooter: null,
-      nzStyle:{
-        top:'20px'
+  showDeleteDialog(id: string){
+    this.chosenProduct = id;
+    this.shouldShowDeleteDialog = true;
+  }
 
-      },
-      nzData: {
-        refreshData: () => this.getData()
-      }
-    })
+  closeModal(){
+    this.chosenProduct = '';
+    this.shouldShowDeleteDialog = false;
   }
 }
