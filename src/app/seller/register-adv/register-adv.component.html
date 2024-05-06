@@ -1,8 +1,8 @@
 <div>
-    <nz-table #nzTable [nzData]="listData" nzTableLayout="fixed" nzFrontPagination="false" [nzScroll]="{ y: '300px' }" nzBordered="true">
+  <div>Bảng xếp hạng đấu giá từ {{formatDate1(this.fromDate)}}(T2) tới {{this.formatDate1(toDate)}}(CN)</div>
+    <nz-table *ngIf="!isLoadingTable" #nzTable [nzData]="listData" nzFrontPagination="false" [nzScroll]="{ y: '300px' }" nzBordered="true" >
         <thead>
           <tr>
-
             <th nzWidth="60px"></th>
             <th nzWidth="60px">XH</th>
             <th>Tên cửa hàng</th>
@@ -14,15 +14,83 @@
           <ng-container *ngFor="let data of nzTable.data; let index = index">
             <tr [ngClass]="{'top': index ==0 || index ==1 || index ==2}">
               <td [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)"></td>
-              <td>{{index+1}}</td>
+              <td [ngClass]="{'highlight': index ==0 || index ==1 || index ==2}">{{index+1}}</td>
               <td>{{ data.shopName }}</td>
-              <td>{{ data.price }}</td>
+              <td>{{ convertNumberToCurrency(data.price) }}</td>
               <td>{{ data.created }}</td>
             </tr>
             <tr [nzExpand]="expandSet.has(data.id)">
-              <span *ngFor="item of data.products">{{ item }}</span>
+              <div *ngFor="let item of data.products">{{ item }}</div>
             </tr>
           </ng-container>
         </tbody>
     </nz-table>
+    <div class="clearfix" *ngIf="!isLoadingTable && !isLoadingProduct">
+      <div style="font-weight: 500;">Giá <span style="color: red;">*</span></div>
+      <input nz-input placeholder="Nhập một giá để đấu thầu" [(ngModel)]="price">
+      <h4 style="margin-top: 10px;">Chọn sản phẩm quảng cáo</h4>
+      <nz-select nzShowSearch nzAllowClear nzMode="multiple" nzMaxMultipleCount="3" nzPlaceHolder="Chọn một sản phẩm" [(ngModel)]="listPrdSelected">
+        <nz-option *ngFor="let item of listProd" [nzLabel]="item.title" [nzValue]="item._id"></nz-option>
+      </nz-select>
+      <nz-upload
+      nzListType="picture"
+      [(nzFileList)]="fileList"
+      [nzShowButton]="fileList.length < 3"
+      [nzPreview]="handlePreview"
+      >
+        <button nz-button>
+          <span nz-icon nzType="upload"></span>
+          Upload
+        </button>
+      </nz-upload>
+      <div class="note">Lưu ý: Thứ tự của các sản phẩm được chọn sẽ lần lượt được gán với thứ tự của các ảnh được chọn</div>
+      <button nz-button (click)="onSave()">Lưu</button>
+      <nz-modal
+        [nzVisible]="previewVisible"
+        [nzContent]="modalContent"
+        [nzFooter]="null"
+        nzWidth="'100vw'"
+        (nzOnCancel)="previewVisible = false"
+      >
+        <ng-template #modalContent>
+          <div style="padding:10px;">
+            <img [src]="previewImage" [ngStyle]="{ width: '100%', height:'250px' }" />
+          </div>
+
+        </ng-template>
+      </nz-modal>
+    </div>
+
+    <div class="bid-history">
+      <div class="box">
+        <div class="box-title">
+          Lịch sử đấu giá
+        </div>
+        <div style="height: 15px;"></div>
+        <nz-table
+          #historyTable
+          [nzData]="listHistory"
+          nzFrontPagination = "false"
+          [nzLoading]="isLoadingHistory"
+          nzBordered="true"
+        >
+          <thead>
+            <tr>
+              <th>Sản phẩm</th>
+              <th>Giá</th>
+              <th>Ngày tạo</th>
+              <th>Kết quả</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of historyTable.data">
+              <td><div *ngFor="let p of item.products">{{ p.product.title }}</div></td>
+              <td>{{convertNumberToCurrency(item.price)}}</td>
+              <td>{{formatDate(item.created)}}</td>
+              <td>{{getResultBid(item)}}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
 </div>

@@ -45,6 +45,10 @@ export class BaseComponent implements OnChanges, OnInit, DoCheck, AfterContentIn
     let date = new Date(day);
     return format(date, 'hh:mm dd-MM-yyyy')
   }
+  protected  formatDate1(day: string){
+    let date = new Date(day);
+    return format(date, 'dd-MM-yyyy')
+  }
 
   public getUsername(user: any){
     if(user?.name) return user.name;
@@ -59,7 +63,7 @@ export class BaseComponent implements OnChanges, OnInit, DoCheck, AfterContentIn
     return format(date, 'dd/MM/yyyy')
   }
 
-  getFileNameFromFileUrl(url: string){
+  getFileNameFromFileUrl(url: any){
     let part1 = url?.split('?')[0];
     let name = part1.split('%2F');
     if(name.length!=2) return ''

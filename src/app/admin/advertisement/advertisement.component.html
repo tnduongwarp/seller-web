@@ -1,1 +1,55 @@
-<p>advertisement works!</p>
+<div style="display: flex; justify-content: space-between;">
+  <div style="font-size: 20px; font-weight: 400;">Bảng xếp hạng đấu giá</div>
+  <div style="display: flex; align-items: center;gap: 10px; margin-right: 20px;">
+    <span nz-icon nzType="left" nzTheme="outline" style="cursor: pointer;" (click)="handleButton(-1)"></span>
+    <div> <span style="font-weight: 500; font-size: 16px;">{{formatDate1(this.fromDate)}}</span> - <span style="font-weight: 500; font-size: 16px;">{{this.formatDate1(toDate)}}</span></div>
+    <span nz-icon nzType="right" nzTheme="outline"  style="cursor: pointer;" (click)="handleButton(1)"></span>
+  </div>
+</div>
+<nz-table *ngIf="!isLoading" #nzTable [nzData]="listBid" nzFrontPagination="false" [nzScroll]="{ y: '500px' }" nzBordered="true" [nzLoading]="isLoading">
+    <thead>
+      <tr>
+        <th nzWidth="60px"></th>
+        <th nzWidth="60px">XH</th>
+        <th>Tên cửa hàng</th>
+        <th>Giá</th>
+        <th>Thời gian</th>
+        <th>Trạng thái</th>
+        <th>Duyệt</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let data of nzTable.data; let index = index">
+        <tr [ngClass]="{'top': index ==0 || index ==1 || index ==2}">
+          <td [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)"></td>
+          <td [ngClass]="{'highlight': index ==0 || index ==1 || index ==2}">{{index+1}}</td>
+          <td>{{ data.shopName }}</td>
+          <td>{{ convertNumberToCurrency(data.price) }}</td>
+          <td>{{ formatDate(data.created) }}</td>
+          <td>{{getResultBid(data)}}</td>
+          <td>
+            <div *ngIf="data.status =='accepted'">
+              <span  style="cursor: pointer; margin-right: 3px;" nz-icon [nzType]="'check'" ></span>
+              <span>Đã phê duyệt</span>
+            </div>
+            <button *ngIf="data.status =='created'" [disabled]="countWeek != 0" (click)="acceptedBid(data.id)"  nz-button nzType="primary" >Duyệt</button>
+          </td>
+        </tr>
+        <tr [nzExpand]="expandSet.has(data.id)">
+          <div *ngFor="let p of data.products; let index = index">
+            <div><span>{{index+1}}.</span> {{p.title}}</div>
+            <div>
+              <img
+                nz-image
+                width="100%"
+                height="200px"
+                [nzSrc]="p.image"
+                alt=""
+              />
+            </div>
+          </div>
+
+        </tr>
+      </ng-container>
+    </tbody>
+</nz-table>
