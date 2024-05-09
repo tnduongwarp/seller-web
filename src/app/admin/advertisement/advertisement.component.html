@@ -32,7 +32,7 @@
               <span  style="cursor: pointer; margin-right: 3px;" nz-icon [nzType]="'check'" ></span>
               <span>Đã phê duyệt</span>
             </div>
-            <button *ngIf="data.status =='created'" [disabled]="countWeek != 0" (click)="acceptedBid(data.id)"  nz-button nzType="primary" >Duyệt</button>
+            <button *ngIf="data.status =='created'" (click)="acceptedBid(data.id)"  nz-button nzType="primary" >Duyệt</button>
           </td>
         </tr>
         <tr [nzExpand]="expandSet.has(data.id)">

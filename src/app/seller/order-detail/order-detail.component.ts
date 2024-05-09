@@ -75,9 +75,9 @@ export class OrderDetailComponent extends BaseComponent{
   updateOrder(){
     this.api.post(`${Const.API_SELLER}/order/transitStatus/${this.orderId}`, {status: this.transitStatus}).then(
       (res: any) => {
-        this.order = res.data;
         this.transitStatus = ''
         this.message.success('Thêm trạng thái thành công');
+        this.getData()
       }
     ).catch(err => this.message.error(err.message))
   }
