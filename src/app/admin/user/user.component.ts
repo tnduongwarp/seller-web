@@ -3,6 +3,7 @@ import { BaseComponent } from '../../base/base.component';
 import { Const } from '../../const/const';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { CreateUserComponent } from '../../modals/create-user/create-user.component';
+import { ChatComponent } from 'src/app/modals/chat/views/chat/chat.component';
 
 @Component({
   selector: 'app-user',
@@ -74,5 +75,27 @@ export class UserComponent extends BaseComponent{
         refreshData:() => this.getData()
       }
     })
+  }
+
+  public chatWithUser(user: any){
+    console.log(user)
+    let userId = JSON.parse(localStorage.getItem('user')!)._id;
+    this.api.post(`${Const.API_CHAT}/add_receiver/${userId}`, {receiver: user._id})
+    .then((res: any) => {
+      this.modal.create({
+        nzTitle: 'Chat',
+        nzFooter: null,
+        nzMask: false,
+        nzWidth: 850,
+        nzBodyStyle:{
+          padding: '0',
+        },
+        nzContent: ChatComponent,
+        nzData: {
+          presentReceiver: user._id,
+        },
+      })
+    })
+    .catch(err => console.log(err))
   }
 }

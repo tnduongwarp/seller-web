@@ -42,7 +42,7 @@ export class ProfileComponent extends BaseComponent{
   async onBtnSave(){
     if(!this.user._id) return;
     if(this.selecetdFile){
-      let currentAvatar = this.getFileNameFromFileUrl(this.user?.avatar);
+      let currentAvatar = this.getFileNameFromFileUrl(this.user?.picture);
       if(currentAvatar) this.uploadService.deleteFileStorage(currentAvatar);
       const fileUpload = new FileUpload(this.selecetdFile)
       this.uploadService.pushFileToStorage(fileUpload).subscribe(url => {

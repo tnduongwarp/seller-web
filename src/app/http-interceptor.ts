@@ -9,12 +9,13 @@ import {
 import { RestApiService } from './service/rest-api.service';
 import { catchError, switchMap } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   public refreshTokenApiUrl = 'http://localhost:3000/auth/refresh-token';
   public refreshToken;
-  constructor(private http: HttpClient,private restApiService: RestApiService) {
+  constructor(private http: HttpClient,private restApiService: RestApiService, private router: Router) {
     this.refreshToken = localStorage.getItem('refreshToken');
   }
 
@@ -40,6 +41,8 @@ export class TokenInterceptor implements HttpInterceptor {
             }),
             catchError((refreshError) => {
               // Xử lý lỗi khi không thể lấy lại access token
+              localStorage.clear();
+              this.router.navigateByUrl('/login')
               return throwError(refreshError);
             })
           );

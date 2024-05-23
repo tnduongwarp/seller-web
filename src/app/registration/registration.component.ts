@@ -45,8 +45,7 @@ export class RegistrationComponent extends BaseComponent {
         lastname: this.validateForm.value.lastname,
         email: this.validateForm.value.email,
         password: this.validateForm.value.password,
-        role: 'user',
-        isSeller: this.validateForm.value.agree
+        role: this.validateForm.value.agree? 'seller' : 'user',
       }
       this.api.post(this.apiUrl(this.authApiUrl)+'signUp', bodySignUp)
       .then((res: any) => {

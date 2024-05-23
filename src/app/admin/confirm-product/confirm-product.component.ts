@@ -4,6 +4,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { Const } from '../../const/const';
 import { CreateProductModal } from '../../modals/create-product/create-product.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-confirm-product',
@@ -23,12 +24,18 @@ export class ConfirmProductComponent extends BaseComponent{
   shouldShowDeleteDialog: boolean = false;
   chosenProduct: string = '';
   reason: string = '';
-  constructor(private modalService: NzModalService, private message: NzMessageService){
+  constructor(private modalService: NzModalService, private message: NzMessageService, public activatedRoute: ActivatedRoute, public router: Router){
     super();
   }
 
   override ngOnInit(): void {
+    this.productType = this.activatedRoute?.snapshot?.queryParams['productType'] || '0';
     this.getData();
+  }
+
+  public productTypeChange(value: any){
+    this.router.navigate(['/admin/product'], {queryParams: {productType: value}});
+    this.getData()
   }
   getData() {
     if(this.createProductModalInstance) this.createProductModalInstance.close();

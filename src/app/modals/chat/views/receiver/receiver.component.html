@@ -6,9 +6,9 @@
   <div style="display: flex; flex-direction: column;">
     <div class="name">
       <div style="color: black; font-size: 16px;"><b>{{getReceiverName(receiver.user)}}</b></div>
-      <div timeago [date]="latestMsg.created"></div>
+      <div *ngIf="latestMsg" timeago [date]="latestMsg.created"></div>
     </div>
-    <div class="last-message">
+    <div  *ngIf="latestMsg" class="last-message">
       {{latestMsg.content}}
     </div>
   </div>

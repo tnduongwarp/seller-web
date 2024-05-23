@@ -1,18 +1,23 @@
-[nz-form] {
-  max-width: 600px;
-}
+:host{
+  #registrationPage{
+    width: 100vw;
+  }
+  [nz-form] {
+    max-width: 600px;
+  }
 
 
-.register-are {
-  margin-bottom: 4px;
-}
-.signup-form{
-  margin: auto;
-  margin-top: 50px;
-  border: solid 1px #d0cece;
-  border-radius: 10px;
-  padding: 10px 50px 50px;
-}
-nz-avatar {
-  margin-right: 16px;
+  .register-are {
+    margin-bottom: 4px;
+  }
+  .signup-form{
+    margin: auto;
+    margin-top: 50px;
+    border: solid 1px #d0cece;
+    border-radius: 10px;
+    padding: 10px 50px 50px;
+  }
+  nz-avatar {
+    margin-right: 16px;
+  }
 }

@@ -4,7 +4,7 @@
       <span nz-icon nzType="plus"></span>
       Thêm sản phẩm
     </button> -->
-    <nz-select  nzAllowClear="false" nzPlaceHolder="Chọn loại sản phẩm" [(ngModel)]="productType" (ngModelChange)="getData()">
+    <nz-select  nzAllowClear="false" nzPlaceHolder="Chọn loại sản phẩm" [(ngModel)]="productType" (ngModelChange)="productTypeChange($event)">
       <nz-option nzLabel="Đã được phê duyệt" nzValue="0"></nz-option>
       <nz-option nzLabel="Đang chờ phê duyệt" nzValue="1"></nz-option>
     </nz-select>
