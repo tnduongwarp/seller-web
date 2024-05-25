@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RegistrationComponent } from './registration/registration.component';
-import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './general-components/registration/registration.component';
+import { LoginComponent } from './general-components/login/login.component';
 import { AuthGuardService } from './service/auth-guard.service';
 import { ProductComponent } from './seller/product/product.component';
 import { RevenueComponent } from './seller/revenue/revenue.component';
 import { AdvertisementComponent } from './admin/advertisement/advertisement.component';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './general-components/profile/profile.component';
 import { ProductDetailComponent } from './seller/product-detail/product-detail.component';
 import { OrderComponent } from './seller/order/order.component';
 import { OrderDetailComponent } from './seller/order-detail/order-detail.component';

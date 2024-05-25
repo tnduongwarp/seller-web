@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BaseComponent } from '../base/base.component';
+import { BaseComponent } from '../../base/base.component';
 import { FormGroup, FormControl, Validators, NonNullableFormBuilder } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { ForgotPWForm } from '../modals/forgot-pw';
+import { ForgotPWForm } from '../../modals/forgot-pw';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({

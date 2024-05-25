@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '../base/base.component';
+import { BaseComponent } from '../../base/base.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Const } from '../const/const';
-import { FileUpload } from '../models/file-upload.model';
-import { FileUploadService } from '../service/upload-file.service';
+import { Const } from '../../const/const';
+import { FileUpload } from '../../models/file-upload.model';
+import { FileUploadService } from '../../service/upload-file.service';
 
 @Component({
   selector: 'app-profile',
