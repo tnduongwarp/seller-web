@@ -34,6 +34,7 @@ export class RegisterAdvComponent extends BaseComponent{
   isLoadingTable: boolean = true;
   isLoadingProduct: boolean = true;
   isLoadingHistory: boolean = true;
+  onProgress: boolean = false;
   fileList: NzUploadFile[] = [];
   originalFileList: NzUploadFile[] = [];
   previewImage: string | undefined = '';
@@ -160,6 +161,7 @@ export class RegisterAdvComponent extends BaseComponent{
         fileUploads.push(fileUpload);
       }
     }
+    this.onProgress = true
     this.uploadService.pushFilesToStorage(fileUploads).subscribe(res => {
       //update bid
       let products: any = [];
@@ -175,10 +177,12 @@ export class RegisterAdvComponent extends BaseComponent{
         (res: any) => {
           console.log(res);
           this.updateData();
+          this.onProgress = false;
           this.notification.success('Thành công', 'Tạo sản phẩm đấu giá thành công')
         }
       ).catch((err: any) => {
-        console.log(err)
+        console.log(err);
+        this.onProgress = false
         this.notification.error('Có lỗi xảy ra','Hãy thử lại sau')
       })
     })
@@ -194,6 +198,7 @@ export class RegisterAdvComponent extends BaseComponent{
         fileUploads.push(fileUpload);
       }
     }
+    this.onProgress = true;
     for(let file of this.originalFileList){
       if(!fileUrlList.includes(file.url)) {
         let fileName = this.getFileNameFromFileUrl(file.url);
@@ -223,9 +228,11 @@ export class RegisterAdvComponent extends BaseComponent{
             console.log(res);
             this.notification.success('Thành công', 'Chỉnh sửa sản phẩm đấu giá thành công')
             this.updateData();
+            this.onProgress = false
           }
         ).catch((err: any) => {
           console.log(err);
+          this.onProgress = false;
           this.notification.error('Có lỗi xảy ra','Hãy thử lại sau')
         })
       })
@@ -243,9 +250,11 @@ export class RegisterAdvComponent extends BaseComponent{
           console.log(res);
           this.notification.success('Thành công', 'Chỉnh sửa sản phẩm đấu giá thành công')
           this.updateData();
+          this.onProgress = false;
         }
       ).catch(err => {
         console.log(err);
+        this.onProgress = false;
         this.notification.error('Có lỗi xảy ra','Hãy thử lại sau')
       })
     }

@@ -44,7 +44,7 @@
         </button>
       </nz-upload>
       <div class="note">Lưu ý: Thứ tự của các sản phẩm được chọn sẽ lần lượt được gán với thứ tự của các ảnh được chọn</div>
-      <button nz-button (click)="onSave()">Lưu</button>
+      <button nz-button [nzLoading]="onProgress" (click)="onSave()">Lưu</button>
       <nz-modal
         [nzVisible]="previewVisible"
         [nzContent]="modalContent"

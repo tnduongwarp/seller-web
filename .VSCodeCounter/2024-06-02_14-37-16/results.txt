@@ -1,0 +1,151 @@
+Date : 2024-06-02 14:37:16
+Directory : d:\DATN\Seller-Web\src
+Total : 87 files,  5251 codes, 155 comments, 436 blanks, all 5842 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| TypeScript |         36 |      3,074 |        109 |        262 |      3,445 |
+| HTML       |         25 |      1,363 |         37 |         55 |      1,455 |
+| SCSS       |         24 |        813 |          4 |        114 |        931 |
+| Less       |          1 |          1 |          5 |          4 |         10 |
+| CSS        |          1 |          0 |          0 |          1 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                          | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                             |         87 |      5,251 |        155 |        436 |      5,842 |
+| . (Files)                                                                                     |          4 |         19 |          6 |         10 |         35 |
+| app                                                                                           |         82 |      5,221 |        149 |        424 |      5,794 |
+| app (Files)                                                                                   |          7 |        686 |          7 |         38 |        731 |
+| app\admin                                                                                     |         18 |      1,152 |         17 |         70 |      1,239 |
+| app\admin\advertisement                                                                       |          3 |        184 |          2 |         11 |        197 |
+| app\admin\confirm-product                                                                     |          3 |        167 |          4 |         13 |        184 |
+| app\admin\confirm-product-detail                                                              |          3 |        235 |          4 |         14 |        253 |
+| app\admin\statitics                                                                           |          3 |        287 |          7 |         15 |        309 |
+| app\admin\user                                                                                |          3 |        151 |          0 |         10 |        161 |
+| app\admin\user-detail                                                                         |          3 |        128 |          0 |          7 |        135 |
+| app\base                                                                                      |          3 |         67 |          0 |          9 |         76 |
+| app\const                                                                                     |          1 |         29 |          0 |          2 |         31 |
+| app\general-components                                                                        |          9 |        530 |         62 |         45 |        637 |
+| app\general-components\login                                                                  |          3 |        129 |          0 |         14 |        143 |
+| app\general-components\profile                                                                |          3 |        210 |          0 |         12 |        222 |
+| app\general-components\registration                                                           |          3 |        191 |         62 |         19 |        272 |
+| app\modals                                                                                    |         21 |        913 |          3 |         97 |      1,013 |
+| app\modals\change-status                                                                      |          3 |         69 |          0 |          7 |         76 |
+| app\modals\chat                                                                               |          9 |        360 |          3 |         60 |        423 |
+| app\modals\chat\views                                                                         |          9 |        360 |          3 |         60 |        423 |
+| app\modals\chat\views\channel                                                                 |          3 |        143 |          0 |         26 |        169 |
+| app\modals\chat\views\chat                                                                    |          3 |        152 |          2 |         25 |        179 |
+| app\modals\chat\views\receiver                                                                |          3 |         65 |          1 |          9 |         75 |
+| app\modals\create-product                                                                     |          3 |        196 |          0 |         11 |        207 |
+| app\modals\create-user                                                                        |          3 |        131 |          0 |          5 |        136 |
+| app\modals\forgot-pw                                                                          |          3 |        157 |          0 |         14 |        171 |
+| app\models                                                                                    |          1 |          9 |          0 |          2 |         11 |
+| app\seller                                                                                    |         18 |      1,730 |         34 |        125 |      1,889 |
+| app\seller\order                                                                              |          3 |        219 |          0 |         20 |        239 |
+| app\seller\order-detail                                                                       |          3 |        291 |          1 |         26 |        318 |
+| app\seller\product                                                                            |          3 |        143 |          0 |         12 |        155 |
+| app\seller\product-detail                                                                     |          3 |        312 |         24 |         15 |        351 |
+| app\seller\register-adv                                                                       |          3 |        427 |          3 |         29 |        459 |
+| app\seller\revenue                                                                            |          3 |        338 |          6 |         23 |        367 |
+| app\service                                                                                   |          4 |        105 |         26 |         36 |        167 |
+| environments                                                                                  |          1 |         11 |          0 |          2 |         13 |
++-----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                      | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| d:\DATN\Seller-Web\src\app\admin\advertisement\advertisement.component.html                   | HTML       |         54 |          0 |          2 |         56 |
+| d:\DATN\Seller-Web\src\app\admin\advertisement\advertisement.component.scss                   | SCSS       |          0 |          0 |          1 |          1 |
+| d:\DATN\Seller-Web\src\app\admin\advertisement\advertisement.component.ts                     | TypeScript |        130 |          2 |          8 |        140 |
+| d:\DATN\Seller-Web\src\app\admin\confirm-product-detail\confirm-product-detail.component.html | HTML       |         84 |          4 |          2 |         90 |
+| d:\DATN\Seller-Web\src\app\admin\confirm-product-detail\confirm-product-detail.component.scss | SCSS       |         30 |          0 |          3 |         33 |
+| d:\DATN\Seller-Web\src\app\admin\confirm-product-detail\confirm-product-detail.component.ts   | TypeScript |        121 |          0 |          9 |        130 |
+| d:\DATN\Seller-Web\src\app\admin\confirm-product\confirm-product.component.html               | HTML       |         65 |          4 |          1 |         70 |
+| d:\DATN\Seller-Web\src\app\admin\confirm-product\confirm-product.component.scss               | SCSS       |          8 |          0 |          1 |          9 |
+| d:\DATN\Seller-Web\src\app\admin\confirm-product\confirm-product.component.ts                 | TypeScript |         94 |          0 |         11 |        105 |
+| d:\DATN\Seller-Web\src\app\admin\statitics\statitics.component.html                           | HTML       |        101 |          7 |          1 |        109 |
+| d:\DATN\Seller-Web\src\app\admin\statitics\statitics.component.scss                           | SCSS       |         40 |          0 |          5 |         45 |
+| d:\DATN\Seller-Web\src\app\admin\statitics\statitics.component.ts                             | TypeScript |        146 |          0 |          9 |        155 |
+| d:\DATN\Seller-Web\src\app\admin\user-detail\user-detail.component.html                       | HTML       |         36 |          0 |          1 |         37 |
+| d:\DATN\Seller-Web\src\app\admin\user-detail\user-detail.component.scss                       | SCSS       |         34 |          0 |          3 |         37 |
+| d:\DATN\Seller-Web\src\app\admin\user-detail\user-detail.component.ts                         | TypeScript |         58 |          0 |          3 |         61 |
+| d:\DATN\Seller-Web\src\app\admin\user\user.component.html                                     | HTML       |         57 |          0 |          1 |         58 |
+| d:\DATN\Seller-Web\src\app\admin\user\user.component.scss                                     | SCSS       |          0 |          0 |          1 |          1 |
+| d:\DATN\Seller-Web\src\app\admin\user\user.component.ts                                       | TypeScript |         94 |          0 |          8 |        102 |
+| d:\DATN\Seller-Web\src\app\app-routing.module.ts                                              | TypeScript |        104 |          0 |          3 |        107 |
+| d:\DATN\Seller-Web\src\app\app.component.html                                                 | HTML       |         67 |          0 |          2 |         69 |
+| d:\DATN\Seller-Web\src\app\app.component.scss                                                 | SCSS       |        114 |          0 |         13 |        127 |
+| d:\DATN\Seller-Web\src\app\app.component.ts                                                   | TypeScript |        159 |          0 |         10 |        169 |
+| d:\DATN\Seller-Web\src\app\app.module.ts                                                      | TypeScript |        175 |          3 |          3 |        181 |
+| d:\DATN\Seller-Web\src\app\base\base.component.css                                            | CSS        |          0 |          0 |          1 |          1 |
+| d:\DATN\Seller-Web\src\app\base\base.component.html                                           | HTML       |          1 |          0 |          1 |          2 |
+| d:\DATN\Seller-Web\src\app\base\base.component.ts                                             | TypeScript |         66 |          0 |          7 |         73 |
+| d:\DATN\Seller-Web\src\app\const\const.ts                                                     | TypeScript |         29 |          0 |          2 |         31 |
+| d:\DATN\Seller-Web\src\app\general-components\login\login.component.html                      | HTML       |         35 |          0 |          2 |         37 |
+| d:\DATN\Seller-Web\src\app\general-components\login\login.component.scss                      | SCSS       |         26 |          0 |          4 |         30 |
+| d:\DATN\Seller-Web\src\app\general-components\login\login.component.ts                        | TypeScript |         68 |          0 |          8 |         76 |
+| d:\DATN\Seller-Web\src\app\general-components\profile\profile.component.html                  | HTML       |         91 |          0 |          2 |         93 |
+| d:\DATN\Seller-Web\src\app\general-components\profile\profile.component.scss                  | SCSS       |         30 |          0 |          4 |         34 |
+| d:\DATN\Seller-Web\src\app\general-components\profile\profile.component.ts                    | TypeScript |         89 |          0 |          6 |         95 |
+| d:\DATN\Seller-Web\src\app\general-components\registration\registration.component.html        | HTML       |         82 |          0 |          2 |         84 |
+| d:\DATN\Seller-Web\src\app\general-components\registration\registration.component.scss        | SCSS       |         21 |          0 |          3 |         24 |
+| d:\DATN\Seller-Web\src\app\general-components\registration\registration.component.ts          | TypeScript |         88 |         62 |         14 |        164 |
+| d:\DATN\Seller-Web\src\app\http-interceptor.ts                                                | TypeScript |         49 |          4 |          3 |         56 |
+| d:\DATN\Seller-Web\src\app\icons-provider.module.ts                                           | TypeScript |         18 |          0 |          4 |         22 |
+| d:\DATN\Seller-Web\src\app\modals\change-status\change-status.component.html                  | HTML       |         10 |          0 |          1 |         11 |
+| d:\DATN\Seller-Web\src\app\modals\change-status\change-status.component.scss                  | SCSS       |          9 |          0 |          1 |         10 |
+| d:\DATN\Seller-Web\src\app\modals\change-status\change-status.component.ts                    | TypeScript |         50 |          0 |          5 |         55 |
+| d:\DATN\Seller-Web\src\app\modals\chat\views\channel\channel.component.html                   | HTML       |         14 |          0 |          3 |         17 |
+| d:\DATN\Seller-Web\src\app\modals\chat\views\channel\channel.component.scss                   | SCSS       |         56 |          0 |         13 |         69 |
+| d:\DATN\Seller-Web\src\app\modals\chat\views\channel\channel.component.ts                     | TypeScript |         73 |          0 |         10 |         83 |
+| d:\DATN\Seller-Web\src\app\modals\chat\views\chat\chat.component.html                         | HTML       |         12 |          0 |          6 |         18 |
+| d:\DATN\Seller-Web\src\app\modals\chat\views\chat\chat.component.scss                         | SCSS       |         90 |          0 |         14 |        104 |
+| d:\DATN\Seller-Web\src\app\modals\chat\views\chat\chat.component.ts                           | TypeScript |         50 |          2 |          5 |         57 |
+| d:\DATN\Seller-Web\src\app\modals\chat\views\receiver\receiver.component.html                 | HTML       |         14 |          0 |          2 |         16 |
+| d:\DATN\Seller-Web\src\app\modals\chat\views\receiver\receiver.component.scss                 | SCSS       |         18 |          0 |          2 |         20 |
+| d:\DATN\Seller-Web\src\app\modals\chat\views\receiver\receiver.component.ts                   | TypeScript |         33 |          1 |          5 |         39 |
+| d:\DATN\Seller-Web\src\app\modals\create-product\create-product.component.html                | HTML       |         61 |          0 |          1 |         62 |
+| d:\DATN\Seller-Web\src\app\modals\create-product\create-product.component.scss                | SCSS       |         30 |          0 |          3 |         33 |
+| d:\DATN\Seller-Web\src\app\modals\create-product\create-product.component.ts                  | TypeScript |        105 |          0 |          7 |        112 |
+| d:\DATN\Seller-Web\src\app\modals\create-user\create-user.component.html                      | HTML       |         68 |          0 |          2 |         70 |
+| d:\DATN\Seller-Web\src\app\modals\create-user\create-user.component.scss                      | SCSS       |          0 |          0 |          1 |          1 |
+| d:\DATN\Seller-Web\src\app\modals\create-user\create-user.component.ts                        | TypeScript |         63 |          0 |          2 |         65 |
+| d:\DATN\Seller-Web\src\app\modals\forgot-pw\index.html                                        | HTML       |         31 |          0 |          7 |         38 |
+| d:\DATN\Seller-Web\src\app\modals\forgot-pw\index.scss                                        | SCSS       |         17 |          0 |          1 |         18 |
+| d:\DATN\Seller-Web\src\app\modals\forgot-pw\index.ts                                          | TypeScript |        109 |          0 |          6 |        115 |
+| d:\DATN\Seller-Web\src\app\models\file-upload.model.ts                                        | TypeScript |          9 |          0 |          2 |         11 |
+| d:\DATN\Seller-Web\src\app\seller\order-detail\order-detail.component.html                    | HTML       |         82 |          0 |          2 |         84 |
+| d:\DATN\Seller-Web\src\app\seller\order-detail\order-detail.component.scss                    | SCSS       |        107 |          1 |         14 |        122 |
+| d:\DATN\Seller-Web\src\app\seller\order-detail\order-detail.component.ts                      | TypeScript |        102 |          0 |         10 |        112 |
+| d:\DATN\Seller-Web\src\app\seller\order\order.component.html                                  | HTML       |         67 |          0 |          4 |         71 |
+| d:\DATN\Seller-Web\src\app\seller\order\order.component.scss                                  | SCSS       |         61 |          0 |          7 |         68 |
+| d:\DATN\Seller-Web\src\app\seller\order\order.component.ts                                    | TypeScript |         91 |          0 |          9 |        100 |
+| d:\DATN\Seller-Web\src\app\seller\product-detail\product-detail.component.html                | HTML       |         94 |         22 |          2 |        118 |
+| d:\DATN\Seller-Web\src\app\seller\product-detail\product-detail.component.scss                | SCSS       |         30 |          0 |          3 |         33 |
+| d:\DATN\Seller-Web\src\app\seller\product-detail\product-detail.component.ts                  | TypeScript |        188 |          2 |         10 |        200 |
+| d:\DATN\Seller-Web\src\app\seller\product\product.component.html                              | HTML       |         56 |          0 |          1 |         57 |
+| d:\DATN\Seller-Web\src\app\seller\product\product.component.scss                              | SCSS       |          0 |          0 |          1 |          1 |
+| d:\DATN\Seller-Web\src\app\seller\product\product.component.ts                                | TypeScript |         87 |          0 |         10 |         97 |
+| d:\DATN\Seller-Web\src\app\seller\register-adv\register-adv.component.html                    | HTML       |         94 |          0 |          3 |         97 |
+| d:\DATN\Seller-Web\src\app\seller\register-adv\register-adv.component.scss                    | SCSS       |         42 |          0 |          6 |         48 |
+| d:\DATN\Seller-Web\src\app\seller\register-adv\register-adv.component.ts                      | TypeScript |        291 |          3 |         20 |        314 |
+| d:\DATN\Seller-Web\src\app\seller\revenue\revenue.component.html                              | HTML       |         74 |          0 |          3 |         77 |
+| d:\DATN\Seller-Web\src\app\seller\revenue\revenue.component.scss                              | SCSS       |         49 |          2 |          9 |         60 |
+| d:\DATN\Seller-Web\src\app\seller\revenue\revenue.component.ts                                | TypeScript |        215 |          4 |         11 |        230 |
+| d:\DATN\Seller-Web\src\app\service\auth-guard.service.ts                                      | TypeScript |         18 |          6 |          8 |         32 |
+| d:\DATN\Seller-Web\src\app\service\injector.ts                                                | TypeScript |          8 |          0 |          4 |         12 |
+| d:\DATN\Seller-Web\src\app\service\rest-api.service.ts                                        | TypeScript |         18 |          3 |          8 |         29 |
+| d:\DATN\Seller-Web\src\app\service\upload-file.service.ts                                     | TypeScript |         61 |         17 |         16 |         94 |
+| d:\DATN\Seller-Web\src\environments\environment.ts                                            | TypeScript |         11 |          0 |          2 |         13 |
+| d:\DATN\Seller-Web\src\index.html                                                             | HTML       |         13 |          0 |          1 |         14 |
+| d:\DATN\Seller-Web\src\main.ts                                                                | TypeScript |          4 |          0 |          4 |          8 |
+| d:\DATN\Seller-Web\src\styles.scss                                                            | SCSS       |          1 |          1 |          1 |          3 |
+| d:\DATN\Seller-Web\src\theme.less                                                             | Less       |          1 |          5 |          4 |         10 |
+| Total                                                                                         |            |      5,251 |        155 |        436 |      5,842 |
++-----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
