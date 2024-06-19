@@ -84,6 +84,9 @@ export class CreateProductModal extends BaseComponent{
       title: this.validateForm.value['title'],
       image: ''
     };
+    if(!body.amount || !body.description || !body.price || !body.title){
+      return this.message.error('Bạn cần điền đầy đủ thông tin')
+    }
     const fileUploads: FileUpload[] = [];
     for(let file of this.fileList){
       if(file?.originFileObj){
