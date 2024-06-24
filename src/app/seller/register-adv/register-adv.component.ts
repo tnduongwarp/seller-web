@@ -281,8 +281,8 @@ export class RegisterAdvComponent extends BaseComponent{
     date1.setMinutes(0);
     date1.setSeconds(0);
     this.fromDate = date1;
-    const date2 = new Date();
-    date2.setDate(date1.getDate()+ 7);
+    const date2 = new Date(date1);
+    date2.setDate(date2.getDate()+ 7);
     date2.setHours(23);
     date2.setMinutes(59);
     date2.setSeconds(59);
