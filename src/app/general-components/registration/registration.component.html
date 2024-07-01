@@ -3,17 +3,17 @@
   <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="signup-form">
     <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 15px;">
       <nz-avatar nzSize="large" nzIcon="shopping-cart" style="background-color: rgb(245, 131, 16);"></nz-avatar>
-      <span style="font-size: 18px; margin-left: 10px; font-weight: bold;">Registration</span>
+      <span style="font-size: 18px; margin-left: 10px; font-weight: bold;">Đăng kí tài khoản</span>
     </div>
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Email không hợp lệ!">
         <input nz-input formControlName="email" id="email" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Mật khẩu</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Mật khẩu không hợp lệ!">
         <input
           nz-input
           type="password"
@@ -24,15 +24,15 @@
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Xác nhận mật khẩu</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
         <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
         <ng-template #errorTpl let-control>
           <div *ngIf="control.errors?.['required']" >
-            Please confirm your password!
+            Bạn phải xác nhận mật khẩu!
           </div>
           <div *ngIf="control.errors?.['confirm']">
-            Two passwords that you enter is inconsistent!
+            Hai mật khẩu bạn vừa nhập không giống nhau!
           </div>
         </ng-template>
       </nz-form-control>
@@ -43,11 +43,11 @@
         [nzXs]="24"
         nzFor="firstname"
         nzRequired
-        nzTooltipTitle="What do you want other to call you"
+        nzTooltipTitle="Họ của bạn"
       >
-        <span>First Name</span>
+        <span>Họ</span>
       </nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your first name!">
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Hãy nhập họ của bạn!">
         <input nz-input id="firstname" formControlName="firstname" />
       </nz-form-control>
     </nz-form-item>
@@ -57,11 +57,11 @@
         [nzXs]="24"
         nzFor="lastname"
         nzRequired
-        nzTooltipTitle="What do you want other to call you"
+        nzTooltipTitle="Tên của bạn"
       >
-        <span>Last Name</span>
+        <span>Tên</span>
       </nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your last name">
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Hãy nhập tên của bạn">
         <input nz-input id="lastname" formControlName="lastname" />
       </nz-form-control>
     </nz-form-item>
@@ -69,14 +69,14 @@
       <nz-form-control [nzSpan]="14" [nzOffset]="6">
         <label nz-checkbox formControlName="agree">
           <span>
-           You are Seller ?
+           Bạn là nhà bán hàng ?
           </span>
         </label>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-row class="register-area">
       <nz-form-control [nzSpan]="14" [nzOffset]="6">
-        <button nz-button nzType="primary">Register</button>
+        <button nz-button nzType="primary">Đăng kí</button>
       </nz-form-control>
     </nz-form-item>
   </form>

@@ -57,7 +57,7 @@ export class RegistrationComponent extends BaseComponent {
         }
       })
       .catch((err: any) => {
-        this.createNotification('error', err.message)
+        this.createNotification('error', err.error.message)
       })
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
@@ -90,7 +90,7 @@ export class RegistrationComponent extends BaseComponent {
   createNotification(type: string, message:string): void {
     this.notification.create(
       type,
-      'Notification Title',
+      '',
       message
     );
   }
