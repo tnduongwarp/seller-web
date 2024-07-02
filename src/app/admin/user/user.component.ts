@@ -98,4 +98,9 @@ export class UserComponent extends BaseComponent{
     })
     .catch(err => console.log(err))
   }
+
+  onchangePage(page: number) {
+    this.pageIndex = page;
+    this.getData()
+  }
 }

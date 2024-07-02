@@ -15,7 +15,7 @@
               [nzTitle]="'Tăng trưởng'"
               [nzPrefix]="getGrowthTemplate(overviewData?.growth)"
               [nzSuffix]="'%'"
-              [nzValueStyle]="{ color: '#3F8600' }"
+              [nzValueStyle]="overviewData?.growth > 0 ? { color: '#3F8600' } : { color : 'red'}"
             ></nz-statistic>
             <ng-template #prefixTplOne><span nz-icon nzType="arrow-up"></span></ng-template>
             <ng-template #prefixTplTwo><span nz-icon nzType="arrow-down"></span></ng-template>

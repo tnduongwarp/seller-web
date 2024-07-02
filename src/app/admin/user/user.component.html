@@ -16,6 +16,7 @@
     [nzTotal]="total"
     nzPageSize="10"
     [nzLoading]="isLoading"
+    (nzPageIndexChange)="onchangePage($event)"
     >
     <thead>
       <tr>
