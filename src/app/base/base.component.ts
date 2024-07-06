@@ -69,4 +69,9 @@ export class BaseComponent implements OnChanges, OnInit, DoCheck, AfterContentIn
     if(name.length!=2) return ''
     return name[1]
   }
+
+  roundToOneDecimalPlace(num: any) {
+    if(!num) return 0;
+    return Math.round(Number(num) * 10) / 10;
+  }
 }

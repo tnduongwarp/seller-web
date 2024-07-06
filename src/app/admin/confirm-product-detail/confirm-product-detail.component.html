@@ -59,7 +59,7 @@
     </button></div>
   <div style="margin-top: 20px;">
     <div>
-      <h4>Đánh giá : {{product?.avgRating || 0}} ({{product?.totalRate || 0}})</h4>
+      <h4>Đánh giá : {{roundToOneDecimalPlace(product?.avgRating) || 0}} ({{product?.totalRate || 0}})</h4>
     </div>
     <hr>
     <div class="reviews">

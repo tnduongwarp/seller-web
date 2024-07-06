@@ -139,8 +139,11 @@ export class RevenueComponent extends BaseComponent{
   public getProductStatiticData(reqProductIds: string[]){
     this.isLoadingProductStatiticData = true;
     const userId = JSON.parse(localStorage.getItem('user')!)?._id;
-    this.api.get(`${Const.API_GET_LIST_PRODUCT}/getListForSeller/${userId}`).then
-    this.api.post(`${Const.API_SELLER}/analytic-by-products/${userId}`,{reqProductIds}).then(
+    // this.api.get(`${Const.API_GET_LIST_PRODUCT}/getListForSeller/${userId}`).then
+    let date = new Date();
+    let from = new Date(date.getFullYear(), date.getMonth(), 1);
+    let to = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    this.api.post(`${Const.API_SELLER}/analytic-by-products/${userId}?from=${from}&to=${to}`,{reqProductIds}).then(
       (res: any) => {
         console.log(res);
         this.productStatiticData = res.data.sumary;
@@ -200,6 +203,7 @@ export class RevenueComponent extends BaseComponent{
           "Apr",
           "May",
           "Jun",
+          "Jul",
           "Aug",
           "Sep",
           "Oct",

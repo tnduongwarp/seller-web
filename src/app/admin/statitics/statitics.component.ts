@@ -115,6 +115,7 @@ export class StatiticsComponent extends BaseComponent{
           "Apr",
           "May",
           "Jun",
+          "Jul",
           "Aug",
           "Sep",
           "Oct",

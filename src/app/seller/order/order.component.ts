@@ -49,7 +49,7 @@ export class OrderComponent extends BaseComponent{
       (res: any) => {
         this.isLoading = false;
         console.log(res);
-        this.listClients = res.clients;
+        if(!this.listClients.length )this.listClients = res.clients;
         this.listOrder = res.data;
         this.skip = res.skip;
         this.total = res.total
